@@ -1,5 +1,6 @@
 # IT209
-This is a school project for IT209 with my partner William Duggleby
+This is a school project for IT209 
+
 Group Members: William Duggleby, Brendon Lugo
 
 Project Scope: Text based adventure game
@@ -14,7 +15,7 @@ Classes: Character class: (knight, archer, mage, priest archetypes)
          End credits
 	       UI
 	   
-Objects: Weapons
+Objects: 	Weapons
 	       Gear
 	       Food
 
