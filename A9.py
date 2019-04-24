@@ -124,13 +124,13 @@ class Boss(Mob):
         print("put drawing in here")
 #-------------------Enemies Above, Biome Below--------------------
 class Biome():
-    def __init__(Forest_Area, Mountian_Area, Deseart_Area, choice):
-        self.Forest_Area = ['Red Wood National Park','Spooky Woods','Hidden Grove','Forest Hut']
-        self.Mountian_Area = ['Mount Denali National Park','Snowy Peaks','Raging River','Log Cabin']
-        self.Deseart_Area = ['Grand Cayone','Ososis','Dunes','Hidden Cave']
-        self.choice = None
+    def __init__(self,Forest_Area, Mountian_Area, Sand_Area, choice):
+        self.Forest_Area = Forest_Area
+        self.Mountian_Area = Mountian_Area
+        self.Sand_Area = Sand_Area
+        self.choice = "G"
         
-    def PickArea(Area):
+    def PickArea(self, Area):
         if Area == "F":
             self.choice = "F"
 
@@ -140,13 +140,22 @@ class Biome():
         elif Area == "D":
             self.choice = "D"
 
-    def PickAreaEvent():
+    def setChoice(self,new):
+        self.choice = new
+        return self.choice
+
+    def PickAreaEvent(self,choice):
         if choice == "F":
             Event = random.choice(self.Forest_Area)
+            print(Event)
         elif choice == "M":
             Event = random.choice(self.Mountian_Area)
+            print(Event)
         elif choice == "D":
             Event = random.choice(self.Deseart_Area)
+            print(Event)
+            
+
         
 #---------BIOME CLASS ABOVE, ITEMS CLASS BELOW------------------------
 class Items():
@@ -166,9 +175,265 @@ class Items():
 gameItems= Items({"Dagger":1,"Broadsword":2,"Greataxe":2,"Rubber Chicken":3,'Apple':1,"Turkey leg":2,"Chipotle":3},
                  {"Yew longbow":2,"Nerf bow":1,"Magic bow":3,"Crossbow":2,'Apple':1,"Turkey leg":2,"Chipotle":3},
                  {"Choatic staff":3,"Spellbook":2,"Useless stick":1,"Magic wand":2,'Apple':1,"Turkey leg":2,"Chipotle":3})
+#-------------Openning Credits-------------------------------
+import time
+import random
+#import pygame
+
+
+
+creditPage = '''
+   Written by Billy Duggleby and Brendon Lugo
+for IT209 at George Mason University, Spring 2019.
+Ascii art wizard created by Morfina at www.asciiart.eu
+Ascii art knight created by fsc at http://ascii.co.uk
+Ascii art archer created by Erorppn Xrzavgm at http://ascii.co.uk
+Ascii art dragon created by Joan at asciiart.website//joan/www.geocities.com
+'''
+
+
+choose = '''
+      * ***      *                                                                                                          
+    *  ****  * **                                                                                                           
+   *  *  ****  **                                                                                                           
+  *  **   **   **                                                                                                           
+ *  ***        **           ****       ****       ****                 **   ****         ****    **   ****     ***  ****    
+**   **        **  ***     * ***  *   * ***  *   * **** *    ***        **    ***  *    * ***  *  **    ***  *  **** **** * 
+**   **        ** * ***   *   ****   *   ****   **  ****    * ***       **     ****    *   ****   **     ****    **   ****  
+**   **        ***   *** **    **   **    **   ****        *   ***      **      **    **    **    **      **     **         
+**   **        **     ** **    **   **    **     ***      **    ***     **      **    **    **    **      **     **         
+**   **        **     ** **    **   **    **       ***    ********      **      **    **    **    **      **     **         
+ **  **        **     ** **    **   **    **         ***  *******       **      **    **    **    **      **     **         
+  ** *      *  **     ** **    **   **    **    ****  **  **            **      **    **    **    **      **     **         
+   ***     *   **     **  ******     ******    * **** *   ****    *      *********     ******      ******* **    ***        
+    *******    **     **   ****       ****        ****     *******         **** ***     ****        *****   **    ***       
+      ***       **    **                                    *****                ***                                        
+                      *                                                   *****   ***                                       
+                     *                                                  ********  **                                        
+                    *                                                  *      ****                                          
+                   *                                                                                                        
+                                                                                                                            
+                                                                                                                            
+                   ***                           *                                                                                          
+                 ** ***    *                   **            *                                                                              
+                **   ***  ***                  **           **                                                                              
+                **         *                   **           **                                                                              
+                **                             **         ********           ***  ****                                                      
+                ******   ***         ****      **  ***   ********     ***     **** **** *                                                   
+                *****     ***       *  ***  *  ** * ***     **       * ***     **   ****                                                    
+                **         **      *    ****   ***   ***    **      *   ***    **                                                           
+                **         **     **     **    **     **    **     **    ***   **                                                           
+                **         **     **     **    **     **    **     ********    **                                                           
+                **         **     **     **    **     **    **     *******     **                                                           
+                **         **     **     **    **     **    **     **          **                                                           
+                **         **     **     **    **     **    **     ****    *   ***                                                          
+                **         *** *   ********    **     **     **     *******     ***                                                         
+                 **         ***      *** ***    **    **             *****                                                                  
+                                          ***         *                                                                                     
+                                     ****   ***       *                                                                                      
+                                    *******  **       *                                                                                       
+      	                           *     ****        * 
+'''
+
+title = '''
+                                                                                                                             
+     ***** *    **   ***              ***                                                                                    
+  ******  *  *****    ***              ***                                                                                   
+ **   *  *     *****   ***              **                                                                                   
+*    *  **     * **      **             **                                                                                   
+    *  ***     *         **             **                  ****                                                             
+   **   **     *         **    ***      **       ****      * ***  * *** **** ****       ***                                  
+   **   **     *         **   * ***     **      * ***  *  *   ****   *** **** ***  *   * ***                                 
+   **   **     *         **  *   ***    **     *   ****  **    **     **  **** ****   *   ***                                
+   **   **     *         ** **    ***   **    **         **    **     **   **   **   **    ***                               
+   **   **     *         ** ********    **    **         **    **     **   **   **   ********                                
+    **  **     *         ** *******     **    **         **    **     **   **   **   *******                                 
+     ** *      *         *  **          **    **         **    **     **   **   **   **                                      
+      ***      ***      *   ****    *   **    ***     *   ******      **   **   **   ****    *                               
+       ******** ********     *******    *** *  *******     ****       ***  ***  ***   *******                                
+         ****     ****        *****      ***    *****                  ***  ***  ***   *****                               
+                                                                                             *                            
+                                                                                             *                           
+                                                                                            *                           
+                                                                                                                          
+                                                                                                                             
+                                                                                                                             
+        **             **                                                                                                    
+     *****              **                                           *                                                       
+    *  ***              **   **                                     **                                                       
+       ***              **   **                                     **                                                       
+      *  **             **    **    ***                           ******** **   ****     ***  ****              ***  ****    
+      *  **         *** **     **    ***     ***    ***  ****    ********   **    ***  *  **** **** *    ***     **** **** * 
+     *    **       *********   **     ***   * ***    **** **** *    **      **     ****    **   ****    * ***     **   ****  
+     *    **      **   ****    **      **  *   ***    **   ****     **      **      **     **          *   ***    **         
+    *      **     **    **     **      ** **    ***   **    **      **      **      **     **         **    ***   **         
+    *********     **    **     **      ** ********    **    **      **      **      **     **         ********    **         
+   *        **    **    **     **      ** *******     **    **      **      **      **     **         *******     **         
+   *        **    **    **     **      *  **          **    **      **      **      **     **         **          **         
+  *****      **   **    **      *******   ****    *   **    **      **       ******* **    ***        ****    *   ***        
+ *   ****    ** *  *****         *****     *******    ***   ***      **       *****   **    ***        *******     ***       
+*     **      **    ***                     *****      ***   ***                                        *****                
+*                                                                                                                            
+ **
+'''
+
+knightImg = '''
+                          ,dM
+                         dMMP
+                        dMMM'
+                        \\MM/
+                        dMMm.
+                       dMMP'_\\---.
+                      _| _  p ;88;`.
+                    ,db; p >  ;8P|  `.
+                   (``T8b,__,'dP |   |
+                   |   `Y8b..dP  ;_  |
+                   |    |`T88P_ /  `\;
+                   :_.-~|d8P'`Y/    /
+                    \\_   TP    ;   7`\\
+         ,,__        >   `._  /'  /   `\\_
+         `._ """"~~~~------|`\\;' ;     ,'
+            """~~~-----~~~'\\__[|;' _.-'  `\\
+                    ;--..._     .-'-._     ;
+                   /      /`~~"'   ,'`\\_ ,/
+                  ;_    /'        /    ,/
+                  | `~-l         ;    /
+                  `\\    ;       /\\.._|
+                    \\    \\      \\     \\
+                    /`---';      `----'
+                   (     / 
+                    `---'
+'''
+
+wizardImg ='''
+                    / \\
+                  .'* */
+               __/_*_*(_
+              / _______ \\
+             _\\_)/___\\(_/_ 
+            / _((\\0-0/))_ \\
+            \ \())(-)(()/ /
+             ' \(((()))/ '
+            / ' \)).))/ ' \\
+           / _ \ - | - /_  \\
+          (   ( .;""";. .)  )
+         _\\"__ /(    )\\ __"/_
+            \\/  \\'  ' /  \\/
+             ( ' '...' ' )
+              / /  |  \\ \\
+             / .   .   . \\
+            /   .     .   \\
+           /   /   |   \\   \\
+         .'   /    b    '.  '.
+     _.-'    /     Bb     '-. '-._ 
+ _.-'       |      BBb       '-.  '-. 
+(___________\____.dBBBb.________)____)
+'''
+
+archerImg = '''
+                                                       \\. 
+                                                      /|.
+                                                   /   |.
+                                                 /     |.
+                                               /       |.
+                                             /         |.
+                                          /            |.
+        -\\                              /              |.
+          \\\                          /                |.
+           \\\                       /                  |.
+            \\|                    /                    |\\
+              \\#####\\           /                      ||
+          ==###########>      /                        ||
+           \\##==      \\     /                          ||
+      ______ =       =|___/__                          ||
+  ,--' ,----`-,__ ___/'  --,-`-========================##==========>
+ \\               '        ##______ ____ ____,--,_____,=##,__
+  `,    __==    ___,-,__,--'#'  ==='   `-'           | ##,-/
+    `-,____,---'       \\####\\          |     ____,---\_##,/
+        #_              |##   \\  __,--==,__,--'        ##
+         #              ]===--==\\                      ||
+         #,             ]         \\                    ||
+          #_            |           \\                  ||
+           ##_       __/'             \\                ||
+            ####='     |                \\              |/
+             ###       |                  \\            |.
+             ##       _'                    \\          |.
+            ###=======]                       \\        |.
+           ///        |                         \\      |.
+           //         |                           \\    |.
+                                                    \\  |.
+                                                      \\|.
+                                                       /.
+'''
+
+dragon = '''\
+                                                    ___
+                                                  .~))>>
+                                                 .~)>>
+                                               .~))))>>>
+                                             .~))>>             ___
+                                           .~))>>)))>>      .-~))>>  
+                                         .~)))))>>       .-~))>>)>
+                                       .~)))>>))))>>  .-~)>>)>
+                   )                 .~))>>))))>>  .-~)))))>>)>
+                ( )@@*)             //)>))))))  .-~))))>>)>
+              ).@(@@               //))>>))) .-~))>>)))))>>)>
+            (( @.@).              //))))) .-~)>>)))))>>)>
+          ))  )@@*.@@ )          //)>))) //))))))>>))))>>)>
+       ((  ((@@@.@@             |/))))) //)))))>>)))>>)>
+      )) @@*. )@@ )   (\\_(\\-\\b  |))>)) //)))>>)))))))>>)>
+    (( @@@(.@(@ .    _/`-`  ~|b |>))) //)>>)))))))>>)>
+     )* @@@ )@*     (@) (@)  /\b|))) //))))))>>))))>>
+   (( @. )@( @ .   _/       /  \b)) //))>>)))))>>>_._
+    )@@ (@@*)@@.  (6,   6) / ^  \b)//))))))>>)))>>   ~~-.
+ ( @jgs@@. @@@.*@_ ~^~^~, /\  ^  \b/)>>))))>>      _.     `,
+  ((@@ @@@*.(@@ .   \^^^/' (  ^   \b)))>>        .'         `,
+   ((@@).*@@ )@ )    `-'   ((   ^  ~)_          /             `,
+     (@@. (@@ ).           (((   ^    `\\        |               `.
+       (*.@*              / ((((        \\        \      .         `.
+                         /   (((((  \\    \\    _.-~\     Y,          \\
+                        /   / (((((( \\    \\.-~   _.`" _.-~`,        ;
+                       /   /   `(((((()    )    (((((~      `,      ;
+                     _/  _/      `"""/   /'                  ;     ;
+                 _.-~_.-~           /  /'                _.-~   _.'
+               ((((~~              / /'              _.-~ __.--~
+                                  ((((          __.-~ _.-~
+                                              <.~~~.~'
+'''
+
+turnCount = 1
+
+print(title)
+time.sleep(1)
+print(choose)
+time.sleep(1)
+
+classType = input('''
+Enter 1 of the following: 
+ --- Knight
+ --- Mage
+ --- Archer
+''')
+name = input("What is your name?: ")
+if classType == "Knight":
+    Player = Knight(name,2,3,4,5,2,'k')
+elif classType == "Archer":
+    Player = Archer(name,2,3,4,5,2,'a')
+elif classType == "Mage":
+    Player = Mage(name,2,3,4,5,2,'m')
+else:
+    print("Uh ohs. we made an oopsie UwU")
+
+GameWorld = Biome(['Red Wood National Park','Spooky Woods','Hidden Grove','Forest Hut'],
+                  ['Mount Denali National Park','Snowy Peaks','Raging River','Log Cabin'],
+                  ['Grand Cayone','Ososis','Dunes','Hidden Cave'],"G")
+choice = input("Choose an area, F,M,D")
+GameWorld.PickAreaEvent(choice)
+gameItems.getItems(Player)
+
 #-----GLOBAL CODE BELOW----------------------------------------
-player = Mage('billy',2,3,4,5,2,'m')
-gameItems.getItems(player)
+#player = Mage('billy',2,3,4,5,2,'m')
+#gameItems.getItems(player)
         
 
 #Comment turn counter increase dark clouds recycle strs with while loop
