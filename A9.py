@@ -160,18 +160,15 @@ class Biome():
     def PickAreaEvent(self,choice):
         if choice == "F":
             Event = random.choice(self.Forest_Area)
-            print(
-'''After walking for a ways,
+            print('''
 You find yourself in and area that you recognize as''',Event)
         elif choice == "M":
             Event = random.choice(self.Mountian_Area)
-            print(
-'''After walking for a ways,
+            print('''
 You find yourself in and area that you recognize as''',Event)
         elif choice == "D":
             Event = random.choice(self.Sand_Area)
-            print(
-'''After walking for a ways,
+            print('''
 You find yourself in and area that you recognize as''',Event)
             
 
@@ -447,8 +444,6 @@ elif classType == "Archer":
     Player = Archer(name,2,3,4,5,2,'a')
 elif classType == "Mage":
     Player = Mage(name,2,3,4,5,2,'m')
-else:
-    print("Uh ohs. we made an oopsie UwU")
 
 GameWorld = Biome(['Red Wood National Park','The Spooky Woods','Hidden Grove',"The Witch's Hut"],
                   ['Mount Denali National Park','The Snowy Peaks','The Raging River','The Abandoned Cabin'],
