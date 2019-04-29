@@ -432,6 +432,13 @@ classType = input('''
 --- Knight
 --- Mage
 --- Archer
+Enter 1 of the above class choices: ''')        
+while classType.lower() not in("knight","mage","archer"):                   #Validation for which class
+    print("Please Enter a Valid Class")
+    classType = input('''
+--- Knight
+--- Mage
+--- Archer
 Enter 1 of the above class choices: ''')
 Char.name = input("What is your name?: ")
 if classType == "Knight":
@@ -456,6 +463,13 @@ To your right you see a desert in the distance. Looks dry. I bet there's a nice
 tanning spot down this way.
 ''')
 choice = input(
+'''-- Mountains
+-- Forest
+-- Desert
+Would you like to go to the mountains, forest, or desert?(F,M,D): ''')
+while choice.upper() not in("F","M","D"):                                           #Validation for which area
+    print("Please pick a valid choice:")
+    choice = input(
 '''-- Mountains
 -- Forest
 -- Desert
