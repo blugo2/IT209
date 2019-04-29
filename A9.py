@@ -503,10 +503,10 @@ GameWorld.PickArea(choice)
 GameWorld.PickAreaEvent(choice)
 #itemPickup = input
 fobjects = ["hollowed out log","patch of mushrooms","some brush","small bush","thorn patch","tall grass"]
-dobjects = ["","","","","","",""]
-mobjects = ["jagged rock","smooth stone","puddle","crevace","","",""]
-entry = input("\nTo your left you see a "+random.choice(fobjects)+
-              ". To your right you see a "+random.choice(fobjects)+". Which do you search?: ")
+dobjects = ["tumble weed","colorful cactus","spikey cactus","small dune","patch of dead grass","antelope skull","large boulder"]
+mobjects = ["jagged rock","smooth stone","puddle","crevace","patch of weeds","mound of gravel","mossy stone"]
+entry = input("\nTo your left you see a(n) "+random.choice(fobjects)+
+              ". To your right you see a(n) "+random.choice(fobjects)+". Which do you search?: ")
 print("\n")
 itemPickup = random.randint(1,10)
 if itemPickup%2 == 0:
