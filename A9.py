@@ -494,8 +494,11 @@ elif choice.upper() == "D":
 GameWorld.PickArea(choice)
 GameWorld.PickAreaEvent(choice)
 #itemPickup = input
-entry = input("\nTo your left you see a bush. To your right you see a hollowed out log."+
-                   " Which do you search?: ")
+fobjects = ["hollowed out log","patch of mushrooms","some brush","small bush","thorn patch","tall grass"]
+dobjects = ["","","","","","",""]
+mobjects = ["jagged rock","smooth stone","puddle","crevace","","",""]
+entry = input("\nTo your left you see a "+random.choice(fobjects)+
+              ". To your right you see a "+random.choice(fobjects)+". Which do you search?: ")
 print("\n")
 itemPickup = random.randint(1,10)
 if itemPickup%2 == 0:
