@@ -482,7 +482,7 @@ if choice.upper() == "F":                                                       
     You stop and gather in your surroundings...""")
     
 elif choice.upper() == "M":
-    print(""""
+    print("""
     You decide to head towards the mountain made of dark rock. As you get closer you
     spot a winding trail that grips to the mountains edge. By the time you have made it
     to the begining of the trail, the air is cold and stale. Something about this
@@ -490,7 +490,15 @@ elif choice.upper() == "M":
     in your surroundings...
     """)
 elif choice.upper() == "D":
-    print("pop")
+    print("""
+    You trod down the slopes towards the desert. With the sand blowing past your
+    face and the sun beating down your neck you feel confident in your choice.
+    As you walk, you begin to notice high dunes besides you and you wonder how
+    long they have stood. In the distance you hear a sharp jackle and your hair
+    stands on edge. Perhaps someone, or something, is also wandering among the
+    dunes. You stand at ease and being to take in your surroundings...
+
+    """)
 GameWorld.PickArea(choice)
 GameWorld.PickAreaEvent(choice)
 #itemPickup = input
