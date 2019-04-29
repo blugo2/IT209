@@ -452,7 +452,7 @@ else:
 
 GameWorld = Biome(['Red Wood National Park','The Spooky Woods','Hidden Grove',"The Witch's Hut"],
                   ['Mount Denali National Park','The Snowy Peaks','The Raging River','The Abandoned Cabin'],
-                  ['The Grand Canyon','The Oasis',"Mars' Dunes",'The Hidden Cave'])
+                  ['The Grand Canyon','The Oasis',"Mars' Dunes",'The Hidden Cave'],'G')
 clear()
 print("Welcome, ",Char.name,"...")
 print('''
@@ -474,6 +474,23 @@ while choice.upper() not in("F","M","D"):                                       
 -- Forest
 -- Desert
 Would you like to go to the mountains, forest, or desert?(F,M,D): ''')
+if choice.upper() == "F":                                                         #Valor text about which area to choose
+    print("""
+    With the wind in your hair and bugs chittering around you, you head towards the 
+    large forest. You have spent some time travelling along the well worn dirt path
+    beneath your feat when your senses spot something. That cute squireel perhaps?
+    You stop and gather in your surroundings...""")
+    
+elif choice.upper() == "M":
+    print(""""
+    You decide to head towards the mountain made of dark rock. As you get closer you
+    spot a winding trail that grips to the mountains edge. By the time you have made it
+    to the begining of the trail, the air is cold and stale. Something about this
+    mountain makes your skin crawl. You decied to stop, catch your breath, and take
+    in your surroundings...
+    """)
+elif choice.upper() == "D":
+    print("pop")
 GameWorld.PickArea(choice)
 GameWorld.PickAreaEvent(choice)
 #itemPickup = input
