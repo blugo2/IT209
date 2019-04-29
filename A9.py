@@ -447,7 +447,7 @@ GameWorld = Biome(['Red Wood National Park','The Spooky Woods','Hidden Grove',"T
                   ['Mount Denali National Park','The Snowy Peaks','The Raging River','The Abandoned Cabin'],
                   ['The Grand Canyon','The Oasis',"Mars' Dunes",'The Hidden Cave'],"G")
 clear()
-print("Wlecome, ",Char.name,"...")
+print("Welcome, ",Char.name,"...")
 print('''
 Before you, you see mountains made of a dark black rock. They look dangerous,
 but the reward has to be worth it... right?
