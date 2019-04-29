@@ -183,9 +183,9 @@ class Items():
     def getItems(self,player):
         if player.c_type == "k":
             print("You find one:",random.choice(list(self.knightems)),"!")
-        elif player.c_type == "a":
-            print("You find one:",random.choice(list(self.mageItems)),"!")
         elif player.c_type == "m":
+            print("You find one:",random.choice(list(self.mageItems)),"!")
+        elif player.c_type == "a":
             print("You find one:",random.choice(list(self.archItems)),"!")
             
 gameItems= Items({"Dagger":1,"Broadsword":2,"Greataxe":2,"Rubber Chicken":3,'Apple':1,"Turkey leg":2,"Chipotle":3},
@@ -438,11 +438,11 @@ while classType.lower() not in("knight","mage","archer"):                   #Val
 --- Archer
 Enter 1 of the above class choices: ''')
 Char.name = input("What is your name?: ")
-if classType == "Knight":
+if classType.lower() == "knight":
     Player = Knight(name,2,3,4,5,2,'k')
-elif classType == "Archer":
+elif classType.lower() == "archer":
     Player = Archer(name,2,3,4,5,2,'a')
-elif classType == "Mage":
+elif classType == "mage":
     Player = Mage(name,2,3,4,5,2,'m')
 
 GameWorld = Biome(['Red Wood National Park','The Spooky Woods','Hidden Grove',"The Witch's Hut"],
@@ -497,11 +497,11 @@ elif choice.upper() == "D":
 GameWorld.PickArea(choice)
 GameWorld.PickAreaEvent(choice)
 #itemPickup = input
-fobjects = ["hollowed out log","patch of mushrooms","some brush","small bush","thorn patch","tall grass"]
-dobjects = ["tumble weed","colorful cactus","spikey cactus","small dune","patch of dead grass","antelope skull","large boulder"]
-mobjects = ["jagged rock","smooth stone","puddle","crevace","patch of weeds","mound of gravel","mossy stone"]
-entry = input("\nTo your left you see a(n) "+random.choice(fobjects)+
-              ". To your right you see a(n) "+random.choice(fobjects)+". Which do you search?: ")
+fobjects = ["a hollowed out log","a patch of mushrooms","some brush","some small bush","a thorn patch","tall grass"]
+dobjects = ["a tumble weed","a colorful cactus","a spikey cactus","a small dune","a patch of dead grass","an antelope skull","a large boulder"]
+mobjects = ["a jagged rock","a smooth stone","a puddle","crevace","a patch of weeds","a mound of gravel","a mossy stone"]
+entry = input("\nTo your left you see  "+random.choice(fobjects)+
+              ". To your right you see "+random.choice(fobjects)+". Which do you search?: ")
 print("\n")
 itemPickup = random.randint(1,10)
 if itemPickup%2 == 0:
