@@ -445,7 +445,7 @@ else:
 
 GameWorld = Biome(['Red Wood National Park','The Spooky Woods','Hidden Grove',"The Witch's Hut"],
                   ['Mount Denali National Park','The Snowy Peaks','The Raging River','The Abandoned Cabin'],
-                  ['The Grand Canyon','The Oasis',"Mars' Dunes",'The Hidden Cave'],"G")
+                  ['The Grand Canyon','The Oasis',"Mars' Dunes",'The Hidden Cave'])
 clear()
 print("Welcome, ",Char.name,"...")
 print('''
