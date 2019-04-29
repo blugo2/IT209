@@ -5,7 +5,18 @@
 #Purpose: Assignment 9                                                    |  
 #-------------------------------------------------------------------------+
 print("Welcome to the start of Assignment 9...")
+from os import system, name
 import random
+def clear(): 
+  
+    # for windows 
+    if name == 'nt': 
+        _ = system('cls') 
+  
+    # for mac and linux(here, os.name is 'posix') 
+    else: 
+        _ = system('clear')
+
 class Char():
     def __init__(self, Name, Hp, Att, Def, Sp):   #Added Sp for Speical Move funcationality
         self.Name= str(Name)
@@ -42,7 +53,7 @@ class Mage(Char):
     def __str__(self):
         print("put drawing in here")
 
-    def Ability():
+    def Ability(self):
         Name = "FireBall"
         Move = self.Sp + 3
         Move_Cost = 1
@@ -58,7 +69,7 @@ class Knight(Char):
     def __str__(self):
         print("put drawing in here")
 
-    def Ability():
+    def Ability(self):
         Name = "Heal"
         Move = self.Sp + 2
         Move_Cost = 1
@@ -74,7 +85,7 @@ class Archer(Char):
     def __str__(self):
         print("put drawing in here")
 
-    def Ability():
+    def Ability(self):
         Name = "Rain Arrows"
         Move = self.Sp + 2
         Move_Cost = 1
@@ -139,6 +150,8 @@ class Biome():
             
         elif Area == "D":
             self.choice = "D"
+        else:
+            print("You entered an incorrect choice.")
 
     def setChoice(self,new):
         self.choice = new
@@ -147,13 +160,19 @@ class Biome():
     def PickAreaEvent(self,choice):
         if choice == "F":
             Event = random.choice(self.Forest_Area)
-            print(Event)
+            print(
+'''After walking for a ways,
+You find yourself in and area that you recognize as''',Event)
         elif choice == "M":
             Event = random.choice(self.Mountian_Area)
-            print(Event)
+            print(
+'''After walking for a ways,
+You find yourself in and area that you recognize as''',Event)
         elif choice == "D":
-            Event = random.choice(self.Deseart_Area)
-            print(Event)
+            Event = random.choice(self.Sand_Area)
+            print(
+'''After walking for a ways,
+You find yourself in and area that you recognize as''',Event)
             
 
         
@@ -166,11 +185,11 @@ class Items():
 
     def getItems(self,player):
         if player.c_type == "k":
-            print(random.choice(list(self.knightems)))
+            print("You find one:",random.choice(list(self.knightems)),"!")
         elif player.c_type == "a":
-            print(random.choice(list(self.archItems)))
+            print("You find one:",random.choice(list(self.mageItems)),"!")
         elif player.c_type == "m":
-            print(random.choice(list(self.mageItems)))
+            print("You find one:",random.choice(list(self.archItems)),"!")
             
 gameItems= Items({"Dagger":1,"Broadsword":2,"Greataxe":2,"Rubber Chicken":3,'Apple':1,"Turkey leg":2,"Chipotle":3},
                  {"Yew longbow":2,"Nerf bow":1,"Magic bow":3,"Crossbow":2,'Apple':1,"Turkey leg":2,"Chipotle":3},
@@ -404,17 +423,17 @@ dragon = '''\
 turnCount = 1
 
 print(title)
-time.sleep(1)
+time.sleep(5)
+clear()
 print(choose)
 time.sleep(1)
 
 classType = input('''
-Enter 1 of the following: 
- --- Knight
- --- Mage
- --- Archer
-''')
-name = input("What is your name?: ")
+--- Knight
+--- Mage
+--- Archer
+Enter 1 of the above class choices: ''')
+Char.name = input("What is your name?: ")
 if classType == "Knight":
     Player = Knight(name,2,3,4,5,2,'k')
 elif classType == "Archer":
@@ -424,12 +443,34 @@ elif classType == "Mage":
 else:
     print("Uh ohs. we made an oopsie UwU")
 
-GameWorld = Biome(['Red Wood National Park','Spooky Woods','Hidden Grove','Forest Hut'],
-                  ['Mount Denali National Park','Snowy Peaks','Raging River','Log Cabin'],
-                  ['Grand Cayone','Ososis','Dunes','Hidden Cave'],"G")
-choice = input("Choose an area, F,M,D")
+GameWorld = Biome(['Red Wood National Park','The Spooky Woods','Hidden Grove',"The Witch's Hut"],
+                  ['Mount Denali National Park','The Snowy Peaks','The Raging River','The Abandoned Cabin'],
+                  ['The Grand Canyon','The Oasis',"Mars' Dunes",'The Hidden Cave'],"G")
+clear()
+print("Wlecome, ",Char.name,"...")
+print('''
+Before you, you see mountains made of a dark black rock. They look dangerous,
+but the reward has to be worth it... right?
+To the left you notice an large forest. Probably some cute squirrels or something
+To your right you see a desert in the distance. Looks dry. I bet there's a nice
+tanning spot down this way.
+''')
+choice = input(
+'''-- Mountains
+-- Forest
+-- Desert
+Would you like to go to the mountains, forest, or desert?(F,M,D): ''')
+GameWorld.PickArea(choice)
 GameWorld.PickAreaEvent(choice)
-gameItems.getItems(Player)
+#itemPickup = input
+entry = input("\nTo your left you see a bush. To your right you see a hollowed out log."+
+                   " Which do you search?: ")
+print("\n")
+itemPickup = random.randint(1,10)
+if itemPickup%2 == 0:
+    gameItems.getItems(Player)
+else:
+    print("Oof, bad luck... You didn't find anything.")
 
 #-----GLOBAL CODE BELOW----------------------------------------
 #player = Mage('billy',2,3,4,5,2,'m')
