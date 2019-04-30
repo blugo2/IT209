@@ -502,51 +502,64 @@ GameWorld.PickAreaEvent(choice)
 fobjects = ["a hollowed out log","a patch of mushrooms","some brush","some small bush","a thorn patch","tall grass"]
 dobjects = ["a tumble weed","a colorful cactus","a spikey cactus","a small dune","a patch of dead grass","an antelope skull","a large boulder"]
 mobjects = ["a jagged rock","a smooth stone","a puddle","crevace","a patch of weeds","a mound of gravel","a mossy stone"]
-entry = input("\nTo your left you see  "+random.choice(fobjects)+
+entry = input("\nTo your left you see "+random.choice(fobjects)+
               ". To your right you see "+random.choice(fobjects)+". Which do you search?: ")
 print("\n")
-go = True
-while go == True:
+#go = True
+#while go == True:
+itemPickup = random.randint(1,10)
+if itemPickup%2 == 0:
+    gameItems.getItems(Player)
+else:
     itemPickup = random.randint(1,10)
-    if itemPickup%2 == 11:
-        gameItems.getItems(Player)
+    if itemPickup in range(1,10):# == "1" or itemPickup == "2" or itemPickup == "3" or itemPickup == "4" or itemPickup == "5" or itemPickup == "6":
+        zombieMob = Zombie(4,2,"Zombie")
+        print(zombieMob)
+        print(zombieMob.openmsg())
+        while zombieMob.Hp > 0:
+            zombie_turn = random.randint(1,2)
+            if zombie_turn == 1:
+                Player.Hp -= zombieMob.Att
+                print("The enemy attacks with a",random.choice(zombieMob.Moves),
+                              "- You have", Player.Hp,"health remaining.")
+            else:
+                print("The zombie's attack missed you!")
+            print("What will you do?")
+            action = input("1. for basic attack 2. to use your special: ")
+            if action == "1":
+                zombieMob.Hp -= Player.Att
+                print("You attack the zombie!")
+                if zombieMob.Hp <= 0:
+                    print("The enemy has lost all its health!!")
+                else:
+                    print("The enemy now has",zombieMob.Hp,"health remaining.")
+            elif action == "2":
+                if Player.c_type.lower() == 'm':
+                    print("f")
+                elif Player.c_type.lower() == 'a':
+                    print("f")
+                elif Player.c_type.lower() == 'k':
+                    print("f")
+        print("\nYou deafted a zombie!")
+        #print("You search the zombie's corpse...\n",
+        #print(gameItems.getItems(Player))
+            #itemPickup = random.randint(1,10)
+            #if itemPickup%2 == 0:
+        
+    elif itemPickup in range(4,5):
+        wolfMob = Wolf(10,2,"Wolf")
+    elif itemPickup == 6:
+        dragonMob = Dragon(10,2,"Dragon")
     else:
-        itemPickup = random.randint(1,10)
-        if itemPickup in range(1,10):# == "1" or itemPickup == "2" or itemPickup == "3" or itemPickup == "4" or itemPickup == "5" or itemPickup == "6":
-            zombieMob = Zombie(4,2,"Zombie")
-        elif itemPickup in range(4,5):
-            wolfMob = Wolf(10,2,"Wolf")
-        elif itemPickup == 6:
-            dragonMob = Dragon(10,2,"Dragon")
-        else:
-            print("Oof, bad luck... You didn't find anything.")
+        print("Oof, bad luck... You didn't find anything.")
 
-    print(zombieMob)
-    print(zombieMob.openmsg)
-    while zombieMob.Hp > 0:
-        zombie_turn = random.randint(1,2)
-        if zombie_turn == 1:
-            Player.Hp -= zombieMob.Att
-            print(zombieMob.Moves, "you have", Player.Hp)
-        else:
-            print("swing and miss")
-        print("What will you do?")
-        action = input("1. Basic attack 2. Use special")
-        if action == "1":
-            print(zombieMob.Hp)
-            zombieMob.Hp -= Player.Att
-            print("you attack the zombie ")
-        elif action == "2":
-            if Player.c_type.lower() == 'm':
-                print("f")
-            elif Player.c_type.lower() == 'a':
-                print("f")
-            elif Player.c_type.lower() == 'k':
-                print("f")
-    print("You deafted")
-    gogo = input("Wanna try again")
-    if gogo == 'y':
-        go = True
+
+#    gogo = input("Wanna try again?: ")
+ #   if gogo == 'y':
+  #      go = True
+   # else:
+    #    go=False
+        
 
 #-----GLOBAL CODE BELOW----------------------------------------
 #player = Mage('billy',2,3,4,5,2,'m')
