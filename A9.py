@@ -104,7 +104,10 @@ class Dragon(Mob):
         self.Moves= ["Fire Breath","Dragons Claw","Tail Whip","Glazing Stare"]
         
     def __str__(self):
-        print("put drawing in here")
+        return("put drawing in here")
+
+    def openmsg(self):
+        return("An Adolesent Dragon appears!")
 
 class Wolf(Mob):
     def __init__(self, Hp, Att, ID):
@@ -113,7 +116,10 @@ class Wolf(Mob):
         self.Moves= ["Howel","Chomp","Claw","Tail Whip"]
         
     def __str__(self):
-        print("put drawing in here")
+        return("put drawing in here")
+
+    def openmsg(self):
+        return("A wild Wolf appears!")
 
 class Zombie(Mob):
     def __init__(self, Hp, Att, ID):
@@ -182,17 +188,221 @@ class Items():
             self.archItems = archItems
             self.mageItems = mageItems
 
-    def getItems(self,player):
-        if player.c_type == "k":
+    #def PlayerItems(self,Player):
+       # if Player.c_type == "k":
+        #    worldItems = self.knightems
+      ##      return worldItems
+      #  elif Player.c_type == "m":
+       #     worldItems = self.mageItems
+      #      return worldItems
+      #  elif Player.c_type == "a":
+      #      worldItems = self.archItems
+      #      return worldItems
+
+    def getItems(self):
+        if Player.c_type == "k":
             print("You find one:",random.choice(list(self.knightems)),"!")
-        elif player.c_type == "m":
+        elif Player.c_type == "m":
             print("You find one:",random.choice(list(self.mageItems)),"!")
-        elif player.c_type == "a":
+        elif Player.c_type == "a":
             print("You find one:",random.choice(list(self.archItems)),"!")
             
-gameItems= Items({"Dagger":1,"Broadsword":2,"Greataxe":2,"Rubber Chicken":3,'Apple':1,"Turkey leg":2,"Chipotle":3},
-                 {"Yew longbow":2,"Nerf bow":1,"Magic bow":3,"Crossbow":2,'Apple':1,"Turkey leg":2,"Chipotle":3},
-                 {"Choatic staff":3,"Spellbook":2,"Useless stick":1,"Magic wand":2,'Apple':1,"Turkey leg":2,"Chipotle":3})
+gameItems= Items({'Apple':1,"Rubber Chicken":2,"Turkey leg":3, "Dagger":4,"Chipotle":5,"Broadsword":6,"Big Mac":7,"Greataxe":8},
+                 {'Apple':1,"Nerf bow":2,"Turkey leg":3, "longbow":4,"Chipotle":5,"Crossbow":6,"Big Mac":7,"Magic bow":8},
+                 {'Apple':1,"Useless stick":2,"Turkey leg":3, "Magic wand":4,"Chipotle":5,"Spellbook":6,"Big Mac":7,"Choatic staff":8}
+                  )
+
+#---------ITEMS CLASS ABOVE, CONTROLLER CLASS BELOW------------------------
+
+class controller():
+    def __init__(self, turnCount, bag, title, choose, Player):
+        self.turnCount = 0
+        self.bag = []
+        self.title = title
+        self.choose = choose
+        self.Player = ""
+
+    def TriggerItem(self):
+        if Player.c_type == "k":
+            PlayerItems = {'Apple':1,"Rubber Chicken":2,"Turkey leg":3, "Dagger":4,"Chipotle":5,"Broadsword":6,"Big Mac":7,"Greataxe":8}
+        elif Player.c_type == "m":
+            PlayerItems = {'Apple':1,"Nerf bow":2,"Turkey leg":3, "longbow":4,"Chipotle":5,"Crossbow":6,"Big Mac":7,"Magic bow":8}
+        elif Player.c_type == "a":
+            PlayerItems = {'Apple':1,"Useless stick":2,"Turkey leg":3, "Magic wand":4,"Chipotle":5,"Spellbook":6,"Big Mac":7,"Choatic staff":8}
+            
+        itemPickup = random.randint(1,10)
+        if itemPickup%2 == 0:
+            pick = random.randint(0,7)
+            current_item = []
+            current_item.append(list(PlayerItems)[pick - 1])
+          
+            if pick%2 == 0:
+                print("You found a", current_item," that you are now weilding and your attack is now", pick)
+                Player.Att += pick
+            else:
+                print("You found a", current_item," that you consume quicly and gain the following hp:",pick)
+                Player.Hp += pick
+        else:
+            controller.TriggerMob()
+    
+    def TriggerMob():
+        itemPickup = random.randint(1,10)
+        if itemPickup in range(1,3):
+            zombieMob = Zombie(4,2,"Zombie")
+            BattleMob = zombieMob
+            controller.TriggerBattle(BattleMob)
+        elif itemPickup in range(4,5):
+            wolfMob = Wolf(10,2,"Wolf")
+            BattleMob = wolfMob
+            controller.TriggerBattle(BattleMob)
+        elif itemPickup == 6:
+            dragonMob = Dragon(10,2,"Dragon")
+            BattleMob = dragonMob
+            controller.TriggerBattle(BattleMob)
+        else:
+            print("Oof, bad luck... You didn't find anything.")
+
+    def TriggerBattle(BattleMob):
+        BattleMob = BattleMob
+        print(BattleMob)
+        print(BattleMob.openmsg())
+        while BattleMob.Hp > 0:
+            BattleMob_Turn = random.randint(1,2)
+            if BattleMob_Turn == 1:
+                Player.Hp -= BattleMob.Att
+                print("The enemy attacks with a",random.choice(BattleMob.Moves),
+                                  "- You have", Player.Hp,"health remaining.")
+            else:
+                print("The ",BattleMob.ID," attack missed you!")
+            print("What will you do?")
+            action = input("1. for basic attack 2. to use your special: ") #put validtoin here
+            if action == "1":
+                BattleMob.Hp -= Player.Att
+                print("You attack the",BattleMob.ID,"!")
+                if BattleMob.Hp <= 0:
+                    print("The enemy has lost all its health!!")
+                else:
+                    print("The enemy now has",BattleMob.Hp,"health remaining.")
+            elif action == "2":
+                if Player.c_type.lower() == 'm':
+                    print("f")
+                elif Player.c_type.lower() == 'a':
+                    print("f")
+                elif Player.c_type.lower() == 'k':
+                    print("f")
+            print("\nYou deafted a",BattleMob.ID,"!")
+        
+        
+    def PlayerClass(self):
+        if self.turnCount == 0:
+            print(title)
+            time.sleep(1)
+            clear()
+            print(choose)
+            time.sleep(1)
+
+            classType = input('''
+            --- Knight
+            --- Mage
+            --- Archer
+            Enter 1 of the above class choices: ''')        
+            while classType.lower() not in("knight","mage","archer"):                   #Validation for which class
+                print("Please Enter a Valid Class")
+                classType = input('''
+            --- Knight
+            --- Mage
+            --- Archer
+            Enter 1 of the above class choices: ''')
+            Char.name = input("What is your name?: ")
+            if classType.lower() == "knight":
+                PlayerK = Knight(name,20,3,4,5,2,'k')
+                self.Player = PlayerK
+                return self.Player
+            elif classType.lower() == "archer":
+                PlayerA = Archer(name,2,3,4,5,2,'a')
+                self.Player = PlayerA
+                return self.Player
+            elif classType.lower() == "mage":
+                PlayerM = Mage(name,2,3,4,5,2,'m')
+                self.Player = PlayerM
+                return self.Player
+            
+    def startWorld(self):
+        clear()
+        print("Welcome, ",self.Player.name,"...")
+        print('''
+        Before you, you see mountains made of a dark black rock. They look dangerous,
+        but the reward has to be worth it... right?
+        To the left you notice an large forest. Probably some cute squirrels or something
+        To your right you see a desert in the distance. Looks dry. I bet there's a nice
+        tanning spot down this way.
+        ''')
+        choice = input(
+        '''
+        -- Mountains
+        -- Forest
+        -- Desert
+        Would you like to go to the mountains, forest, or desert?(F,M,D): ''')
+        while choice.upper() not in("F","M","D"):                                           #Validation for which area
+            print("Please pick a valid choice:")
+            choice = input(
+            '''
+            -- Mountains
+            -- Forest
+            -- Desert
+            Would you like to go to the mountains, forest, or desert?(F,M,D): ''')
+        if choice.upper() == "F":                                                         #Valor text about which area to choose
+            print("""
+            With the wind in your hair and bugs chittering around you, you head towards the 
+            large forest. You have spent some time travelling along the well worn dirt path
+            beneath your feat when your senses spot something. That cute squireel perhaps?
+            You stop and gather in your surroundings...""")
+                
+        elif choice.upper() == "M":
+            print("""
+            You decide to head towards the mountain made of dark rock. As you get closer you
+            spot a winding trail that grips to the mountains edge. By the time you have made it
+            to the begining of the trail, the air is cold and stale. Something about this
+            mountain makes your skin crawl. You decied to stop, catch your breath, and take
+            in your surroundings...
+            """)
+        elif choice.upper() == "D":
+            print("""
+            You trod down the slopes towards the desert. With the sand blowing past your
+            face and the sun beating down your neck you feel confident in your choice.
+            As you walk, you begin to notice high dunes besides you and you wonder how
+            long they have stood. In the distance you hear a sharp jackle and your hair
+            stands on edge. Perhaps someone, or something, is also wandering among the
+            dunes. You stand at ease and being to take in your surroundings...
+            """)
+        GameWorld = Biome(['Red Wood National Park','The Spooky Woods','Hidden Grove',"The Witch's Hut"],
+                ['Mount Denali National Park','The Snowy Peaks','The Raging River','The Abandoned Cabin'],
+                ['The Grand Canyon','The Oasis',"Mars' Dunes",'The Hidden Cave'],'G')
+        GameWorld.PickArea(choice)
+        GameWorld.PickAreaEvent(choice)
+        self.turnCount += 1
+        
+        while self.turnCount < 5:
+            GameWorld = Biome(['Red Wood National Park','The Spooky Woods','Hidden Grove',"The Witch's Hut"],
+                ['Mount Denali National Park','The Snowy Peaks','The Raging River','The Abandoned Cabin'],
+                ['The Grand Canyon','The Oasis',"Mars' Dunes",'The Hidden Cave'],'G')
+            GameWorld.PickAreaEvent(choice)
+            fobjects = ["a hollowed out log","a patch of mushrooms","some brush","some small bush","a thorn patch","tall grass"]
+            dobjects = ["a tumble weed","a colorful cactus","a spikey cactus","a small dune","a patch of dead grass","an antelope skull","a large boulder"]
+            mobjects = ["a jagged rock","a smooth stone","a puddle","crevace","a patch of weeds","a mound of gravel","a mossy stone"]
+            entry = input("\nTo your left you see "+random.choice(fobjects)+
+                ". To your right you see "+random.choice(fobjects)+". Which do you search?: ")
+            print("\n")
+            controller.TriggerItem(Player)
+            self.turnCount += 1
+      
+        controller.endgame()
+        
+       
+
+    def endGame(self):
+            print("boss")
+
 #-------------Openning Credits-------------------------------
 import time
 import random
@@ -419,161 +629,14 @@ dragon = '''\
                                               <.~~~.~'
 '''
 
-turnCount = 1
 
-print(title)
-time.sleep(1)
-clear()
-print(choose)
-time.sleep(1)
 
-classType = input('''
---- Knight
---- Mage
---- Archer
-Enter 1 of the above class choices: ''')        
-while classType.lower() not in("knight","mage","archer"):                   #Validation for which class
-    print("Please Enter a Valid Class")
-    classType = input('''
---- Knight
---- Mage
---- Archer
-Enter 1 of the above class choices: ''')
-Char.name = input("What is your name?: ")
-if classType.lower() == "knight":
-    Player = Knight(name,20,3,4,5,2,'k')
-elif classType.lower() == "archer":
-    Player = Archer(name,2,3,4,5,2,'a')
-elif classType.lower() == "mage":
-    Player = Mage(name,2,3,4,5,2,'m')
+            
 
-GameWorld = Biome(['Red Wood National Park','The Spooky Woods','Hidden Grove',"The Witch's Hut"],
-                  ['Mount Denali National Park','The Snowy Peaks','The Raging River','The Abandoned Cabin'],
-                  ['The Grand Canyon','The Oasis',"Mars' Dunes",'The Hidden Cave'],'G')
-clear()
-print("Welcome, ",Char.name,"...")
-print('''
-Before you, you see mountains made of a dark black rock. They look dangerous,
-but the reward has to be worth it... right?
-To the left you notice an large forest. Probably some cute squirrels or something
-To your right you see a desert in the distance. Looks dry. I bet there's a nice
-tanning spot down this way.
-''')
-choice = input(
-'''-- Mountains
--- Forest
--- Desert
-Would you like to go to the mountains, forest, or desert?(F,M,D): ''')
-while choice.upper() not in("F","M","D"):                                           #Validation for which area
-    print("Please pick a valid choice:")
-    choice = input(
-'''-- Mountains
--- Forest
--- Desert
-Would you like to go to the mountains, forest, or desert?(F,M,D): ''')
-if choice.upper() == "F":                                                         #Valor text about which area to choose
-    print("""
-    With the wind in your hair and bugs chittering around you, you head towards the 
-    large forest. You have spent some time travelling along the well worn dirt path
-    beneath your feat when your senses spot something. That cute squireel perhaps?
-    You stop and gather in your surroundings...""")
-    
-elif choice.upper() == "M":
-    print("""
-    You decide to head towards the mountain made of dark rock. As you get closer you
-    spot a winding trail that grips to the mountains edge. By the time you have made it
-    to the begining of the trail, the air is cold and stale. Something about this
-    mountain makes your skin crawl. You decied to stop, catch your breath, and take
-    in your surroundings...
-    """)
-elif choice.upper() == "D":
-    print("""
-    You trod down the slopes towards the desert. With the sand blowing past your
-    face and the sun beating down your neck you feel confident in your choice.
-    As you walk, you begin to notice high dunes besides you and you wonder how
-    long they have stood. In the distance you hear a sharp jackle and your hair
-    stands on edge. Perhaps someone, or something, is also wandering among the
-    dunes. You stand at ease and being to take in your surroundings...
 
-    """)
-GameWorld.PickArea(choice)
-GameWorld.PickAreaEvent(choice)
-#itemPickup = input
-fobjects = ["a hollowed out log","a patch of mushrooms","some brush","some small bush","a thorn patch","tall grass"]
-dobjects = ["a tumble weed","a colorful cactus","a spikey cactus","a small dune","a patch of dead grass","an antelope skull","a large boulder"]
-mobjects = ["a jagged rock","a smooth stone","a puddle","crevace","a patch of weeds","a mound of gravel","a mossy stone"]
-entry = input("\nTo your left you see "+random.choice(fobjects)+
-              ". To your right you see "+random.choice(fobjects)+". Which do you search?: ")
-print("\n")
-#go = True
-#while go == True:
-itemPickup = random.randint(1,10)
-if itemPickup%2 == 0:
-    gameItems.getItems(Player)
-else:
-    itemPickup = random.randint(1,10)
-    if itemPickup in range(1,10):# == "1" or itemPickup == "2" or itemPickup == "3" or itemPickup == "4" or itemPickup == "5" or itemPickup == "6":
-        zombieMob = Zombie(4,2,"Zombie")
-        print(zombieMob)
-        print(zombieMob.openmsg())
-        while zombieMob.Hp > 0:
-            zombie_turn = random.randint(1,2)
-            if zombie_turn == 1:
-                Player.Hp -= zombieMob.Att
-                print("The enemy attacks with a",random.choice(zombieMob.Moves),
-                              "- You have", Player.Hp,"health remaining.")
-            else:
-                print("The zombie's attack missed you!")
-            print("What will you do?")
-            action = input("1. for basic attack 2. to use your special: ")
-            if action == "1":
-                zombieMob.Hp -= Player.Att
-                print("You attack the zombie!")
-                if zombieMob.Hp <= 0:
-                    print("The enemy has lost all its health!!")
-                else:
-                    print("The enemy now has",zombieMob.Hp,"health remaining.")
-            elif action == "2":
-                if Player.c_type.lower() == 'm':
-                    print("f")
-                elif Player.c_type.lower() == 'a':
-                    print("f")
-                elif Player.c_type.lower() == 'k':
-                    print("f")
-        print("\nYou deafted a zombie!")
-        #print("You search the zombie's corpse...\n",
-        #print(gameItems.getItems(Player))
-            #itemPickup = random.randint(1,10)
-            #if itemPickup%2 == 0:
-        
-    elif itemPickup in range(4,5):
-        wolfMob = Wolf(10,2,"Wolf")
-    elif itemPickup == 6:
-        dragonMob = Dragon(10,2,"Dragon")
-    else:
-        print("Oof, bad luck... You didn't find anything.")
-        
-class controller():
-    def __init__(self, turnCount, bag):
-        self.turnCount = 1
-        self.bag = bag
-
-    def getBiome(self):
-        pickAreaEvent()
-
-    def endGame(self):
-        if turnCount == 5:
-            #boss enemy fight thing scene dohicker stuff
-
-    def encounter(self):
-        
-#    gogo = input("Wanna try again?: ")
- #   if gogo == 'y':
-  #      go = True
-   # else:
-    #    go=False
-        
-
+control = controller(0,0,title,choose,0)
+Player = control.PlayerClass()
+control.startWorld()
 #-----GLOBAL CODE BELOW----------------------------------------
 #player = Mage('billy',2,3,4,5,2,'m')
 #gameItems.getItems(player)
