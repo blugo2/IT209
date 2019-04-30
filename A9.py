@@ -552,8 +552,21 @@ else:
         dragonMob = Dragon(10,2,"Dragon")
     else:
         print("Oof, bad luck... You didn't find anything.")
+        
+class controller():
+    def __init__(self, turnCount, bag):
+        self.turnCount = 1
+        self.bag = bag
 
+    def getBiome(self):
+        pickAreaEvent()
 
+    def endGame(self):
+        if turnCount == 5:
+            #boss enemy fight thing scene dohicker stuff
+
+    def encounter(self):
+        
 #    gogo = input("Wanna try again?: ")
  #   if gogo == 'y':
   #      go = True
