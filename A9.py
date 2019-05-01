@@ -267,7 +267,6 @@ class controller():
             print("Oof, bad luck... You didn't find anything.")
 
     def TriggerBattle(BattleMob):
-        clear()
         BattleMob = BattleMob
         print(BattleMob)
         print(BattleMob.openmsg())
@@ -275,15 +274,25 @@ class controller():
             BattleMob_Turn = random.randint(1,2)
             if BattleMob_Turn == 1:
                 Player.Hp -= BattleMob.Att
-                print("The enemy attacks with a",random.choice(BattleMob.Moves),
+                if Player.Hp >0:
+                    print("The enemy attacks with",random.choice(BattleMob.Moves),
                                   "- You have", Player.Hp,"health remaining.")
+                else:
+                    print("The enemy attacks with a",random.choice(BattleMob.Moves),
+                                  "- You have 0 health. You died!!")
             else:
                 print("The ",BattleMob.ID," attack missed you!")
+            if Player.Hp < 1:
+                #self.turnCount = 6
+                break
+            else:
+                pass
             print("What will you do?")
             action = input("1. for basic attack 2. to use your special: ") #put validtoin here
             if action == "1":
                 BattleMob.Hp -= Player.Att
                 print("You attack the",BattleMob.ID,"!")
+                
                 if BattleMob.Hp <= 0:
                     print("The enemy has lost all its health!!")
                 else:
@@ -295,7 +304,10 @@ class controller():
                     print("f")
                 elif Player.c_type.lower() == 'k':
                     print("f")
-        print("\nYou deafted a",BattleMob.ID,"!")
+        if Player.Hp >0:
+            print("You defeated a",BattleMob.ID)
+        else:
+            control.turnCount = 6
         
         
     def PlayerClass(self):
@@ -389,7 +401,9 @@ class controller():
                     ("Having progessed further along towards your destination you stop to take a rest. Before your eyes fully close you note that the object on the horizion you saw eariler has reappeared, bigger in size yet still quit some distance away. You note that it may be a strom, but quickly dirft to sleep."),
                     ("Now that you have made considerable progress through the area you are suddenly aware of a dark presence near you. You look up and realize that the dark object from before was indeed a storm, a big one too as it apears. Hopefully you reach your destination before it hits you..."),
                     ("The storm is making quick  time, and you feel the air around get colder. The air tastes moist, and the sky is grey. You quickly push on towards the center of this area!"),
-                    ("The storm is upon you! The edge of the storm is quickly gaining ground on you, try as you might you are not able to outrun it. The sky turns dark around you, and thick heavy droplets press against your skin. Lighting crackles and momentairy lights your path. You breifly see a figure standing before you, it seems to be the epicentor of the storm...")]
+                    ("The storm is upon you! The edge of the storm is quickly gaining ground on you, try as you might you are not able to outrun it. The sky turns dark around you, and thick heavy droplets press against your skin. Lighting crackles and momentairy lights your path. You breifly see a figure standing before you, it seems to be the epicentor of the storm..."),
+                    ("Death greets you"),
+                    ("The clouds clear up")]
         
         GameWorld = Biome(['Red Wood National Park','The Spooky Woods','Hidden Grove',"The Witch's Hut"],
                 ['Mount Denali National Park','The Snowy Peaks','The Raging River','The Abandoned Cabin'],
