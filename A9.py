@@ -27,7 +27,7 @@ class Char():
         #self.Bag = []                       #Change from UML Char has bag rather than UI
 
     def __str__(self):
-        print("put ascit drawing here")
+        print("**put ascii drawing here**")
 
     #def Access_Bag(Bag):
         #for i in bag:
@@ -42,7 +42,7 @@ class Char():
                 self.Hp += Move
             print(self.name,' uses ',name,'!')
         else:
-            print("You do not have enough Magic!")
+            print("You do not have enough Magic for that!")
 
 class Mage(Char):
     def __init__(self, Name, Hp, Att, Def, Sp, Mag, c_type):
@@ -101,25 +101,25 @@ class Dragon(Mob):
     def __init__(self,Hp, Att, ID):
         super().__init__(Hp, Att)
         self.ID = str(ID)
-        self.Moves= ["Fire Breath","Dragons Claw","Tail Whip","Glazing Stare"]
+        self.Moves= ["Fire Breath","Dragon's Claw","Tail Whip","Glazing Stare"]
         
     def __str__(self):
         return("put drawing in here")
 
     def openmsg(self):
-        return("An Adolesent Dragon appears!")
+        return("An adolesent dragon appears!")
 
 class Wolf(Mob):
     def __init__(self, Hp, Att, ID):
         super().__init__(Hp, Att)
         self.ID = str(ID)
-        self.Moves= ["Howel","Chomp","Claw","Tail Whip"]
+        self.Moves= ["Howlof the pack","Chomp","Claw","Tail Whip"]
         
     def __str__(self):
         return("put drawing in here")
 
     def openmsg(self):
-        return("A wild Wolf appears!")
+        return("A wild wolf appears!")
 
 class Zombie(Mob):
     def __init__(self, Hp, Att, ID):
@@ -169,15 +169,15 @@ class Biome():
         if choice == "F":
             Event = random.choice(self.Forest_Area)
             print('''
-You find yourself in and area that you recognize as''',Event)
+You find yourself in an area that you recognize as''',Event)
         elif choice == "M":
             Event = random.choice(self.Mountian_Area)
             print('''
-You find yourself in and area that you recognize as''',Event)
+You find yourself in an area that you recognize as''',Event)
         elif choice == "D":
             Event = random.choice(self.Sand_Area)
             print('''
-You find yourself in and area that you recognize as''',Event)
+You find yourself in an area that you recognize as''',Event)
             
 
         
@@ -290,7 +290,7 @@ class controller():
                     print("f")
                 elif Player.c_type.lower() == 'k':
                     print("f")
-            print("\nYou deafted a",BattleMob.ID,"!")
+        print("\nYou deafted a",BattleMob.ID,"!")
         
         
     def PlayerClass(self):
@@ -333,8 +333,8 @@ class controller():
         print('''
         Before you, you see mountains made of a dark black rock. They look dangerous,
         but the reward has to be worth it... right?
-        To the left you notice an large forest. Probably some cute squirrels or something
-        To your right you see a desert in the distance. Looks dry. I bet there's a nice
+        To the left, you notice a large forest. Probably some cute squirrels or something
+        To your right, you see a desert in the distance. Looks dry. I bet there's a nice
         tanning spot down this way.
         ''')
         choice = input(
@@ -355,31 +355,31 @@ class controller():
             print("""
             With the wind in your hair and bugs chittering around you, you head towards the 
             large forest. You have spent some time travelling along the well worn dirt path
-            beneath your feat when your senses spot something. That cute squireel perhaps?
+            beneath your feet when your senses begin to notice something. That cute squirrel perhaps?
             You stop and gather in your surroundings...""")
                 
         elif choice.upper() == "M":
             print("""
-            You decide to head towards the mountain made of dark rock. As you get closer you
-            spot a winding trail that grips to the mountains edge. By the time you have made it
-            to the begining of the trail, the air is cold and stale. Something about this
-            mountain makes your skin crawl. You decied to stop, catch your breath, and take
-            in your surroundings...
+            You decide to head towards the mountains made of a dark, ancient stone. As you get
+            closer, you spot a winding trail that grips to the edge of one of the mountains. By
+            the time you have made it to the begining of the trail, the air is cold and stale.
+            Something about this mountain makes your skin crawl. You decied to stop, catch your
+            breath, and take in your surroundings...
             """)
         elif choice.upper() == "D":
             print("""
             You trod down the slopes towards the desert. With the sand blowing past your
-            face and the sun beating down your neck you feel confident in your choice.
+            face and the sun beating down your neck, you feel confident in your choice.
             As you walk, you begin to notice high dunes besides you and you wonder how
-            long they have stood. In the distance you hear a sharp jackle and your hair
+            long they have stood. In the distance, you hear a sharp cackle and your hair
             stands on edge. Perhaps someone, or something, is also wandering among the
             dunes. You stand at ease and being to take in your surroundings...
             """)
-        GameWorld = Biome(['Red Wood National Park','The Spooky Woods','Hidden Grove',"The Witch's Hut"],
-                ['Mount Denali National Park','The Snowy Peaks','The Raging River','The Abandoned Cabin'],
-                ['The Grand Canyon','The Oasis',"Mars' Dunes",'The Hidden Cave'],'G')
-        GameWorld.PickArea(choice)
-        GameWorld.PickAreaEvent(choice)
+        #GameWorld = Biome(['Red Wood National Park','The Spooky Woods','Hidden Grove',"The Witch's Hut"],
+        #        ['Mount Denali National Park','The Snowy Peaks','The Raging River','The Abandoned Cabin'],
+        #        ['The Grand Canyon','The Oasis',"Mars' Dunes",'The Hidden Cave'],'G')
+        #GameWorld.PickArea(choice)
+        #GameWorld.PickAreaEvent(choice)
         self.turnCount += 1
         
         while self.turnCount < 5:
@@ -387,18 +387,17 @@ class controller():
                 ['Mount Denali National Park','The Snowy Peaks','The Raging River','The Abandoned Cabin'],
                 ['The Grand Canyon','The Oasis',"Mars' Dunes",'The Hidden Cave'],'G')
             GameWorld.PickAreaEvent(choice)
-            fobjects = ["a hollowed out log","a patch of mushrooms","some brush","some small bush","a thorn patch","tall grass"]
-            dobjects = ["a tumble weed","a colorful cactus","a spikey cactus","a small dune","a patch of dead grass","an antelope skull","a large boulder"]
-            mobjects = ["a jagged rock","a smooth stone","a puddle","crevace","a patch of weeds","a mound of gravel","a mossy stone"]
+            fobjects = ["a hollowed out log","a patch of mushrooms",'a puddle teaming with life',"some brush","some small bushes","a thorn patch","tall grass"]
+            dobjects = ["a ragged looking tumble weed","a small, colorful cactus","a spikey cactus","a small dune","a patch of dead grass","an antelope skull","a large boulder"]
+            mobjects = ["a large, jagged rock","a worn boulder","a grimy puddle","a small crevace","a patch of weeds","a mound of gravel","a mossy stone"]
             entry = input("\nTo your left you see "+random.choice(fobjects)+
                 ". To your right you see "+random.choice(fobjects)+". Which do you search?: ")
             print("\n")
             controller.TriggerItem(Player)
             self.turnCount += 1
       
-        controller.endgame()
-        
-       
+        controller.endGame()
+
 
     def endGame(self):
             print("boss")
@@ -637,9 +636,5 @@ dragon = '''\
 control = controller(0,0,title,choose,0)
 Player = control.PlayerClass()
 control.startWorld()
-#-----GLOBAL CODE BELOW----------------------------------------
-#player = Mage('billy',2,3,4,5,2,'m')
-#gameItems.getItems(player)
-        
 
 #Comment turn counter increase dark clouds recycle strs with while loop
