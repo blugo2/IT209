@@ -51,7 +51,7 @@ class Mage(Char):
         self.c_type = 'm'
 
     def __str__(self):
-        print("put drawing in here")
+        print(wizardImg)
 
     def Ability(self):
         Name = "FireBall"
@@ -67,7 +67,7 @@ class Knight(Char):
         self.c_type = 'k'
 
     def __str__(self):
-        print("put drawing in here")
+        print(knightImage)
 
     def Ability(self):
         Name = "Heal"
@@ -83,7 +83,7 @@ class Archer(Char):
         self.c_type = 'a'
 
     def __str__(self):
-        print("put drawing in here")
+        print(archerImg)
 
     def Ability(self):
         Name = "Rain Arrows"
@@ -104,7 +104,7 @@ class Dragon(Mob):
         self.Moves= ["Fire Breath","Dragon's Claw","Tail Whip","Glazing Stare"]
         
     def __str__(self):
-        return("put drawing in here")
+        return(dragon)
 
     def openmsg(self):
         return("An adolesent dragon appears!")
@@ -116,7 +116,7 @@ class Wolf(Mob):
         self.Moves= ["Howlof the pack","Chomp","Claw","Tail Whip"]
         
     def __str__(self):
-        return("put drawing in here")
+        return(wolfImg)
 
     def openmsg(self):
         return("A wild wolf appears!")
@@ -128,7 +128,7 @@ class Zombie(Mob):
         self.Moves= ["Bite","Claw","Screech","Decaying Burst"]
         
     def __str__(self):
-        return("put drawing in here")
+        return(zombieImg)
         
     def openmsg(self):
         return("A wild zombie appears!")
@@ -270,7 +270,7 @@ class controller():
         BattleMob = BattleMob
         print(BattleMob)
         print(BattleMob.openmsg())
-        while BattleMob.Hp > 0:
+        while BattleMob.Hp > 0 and Player.Hp > 0:
             BattleMob_Turn = random.randint(1,2)
             if BattleMob_Turn == 1:
                 Player.Hp -= BattleMob.Att
@@ -280,6 +280,7 @@ class controller():
                 else:
                     print("The enemy attacks with a",random.choice(BattleMob.Moves),
                                   "- You have 0 health. You died!!")
+                    break
             else:
                 print("The ",BattleMob.ID," attack missed you!")
             if Player.Hp < 1:
@@ -299,15 +300,69 @@ class controller():
                     print("The enemy now has",BattleMob.Hp,"health remaining.")
             elif action == "2":
                 if Player.c_type.lower() == 'm':
-                    print("f")
+                    print("Your special")
                 elif Player.c_type.lower() == 'a':
                     print("f")
                 elif Player.c_type.lower() == 'k':
                     print("f")
         if Player.Hp >0:
             print("You defeated a",BattleMob.ID)
-        else:
+        elif Player.Hp == 0:
             control.turnCount = 6
+            exit
+        elif BattleMob == Professor_Shuman:
+            control.turnCount = 7
+            exit
+
+##################################
+    def TriggerBoss(BattleMob):
+        BattleMob = BattleMob
+        print(BattleMob)
+        print(BattleMob.openmsg())
+        while BattleMob.Hp > 0 and Player.Hp > 0:
+            BattleMob_Turn = random.randint(1,2)
+            if BattleMob_Turn == 1:
+                Player.Hp -= BattleMob.Att
+                if Player.Hp >0:
+                    print("The enemy attacks with",random.choice(BattleMob.Moves),
+                                  "- You have", Player.Hp,"health remaining.")
+                else:
+                    print("The enemy attacks with a",random.choice(BattleMob.Moves),
+                                  "- You have 0 health. You died!!")
+                    break
+            else:
+                print("The ",BattleMob.ID," attack missed you!")
+            if Player.Hp < 1:
+                #self.turnCount = 6
+                break
+            else:
+                pass
+            print("What will you do?")
+            action = input("1. for basic attack 2. to use your special: ") #put validtoin here
+            if action == "1":
+                BattleMob.Hp -= Player.Att
+                print("You attack the",BattleMob.ID,"!")
+                
+                if BattleMob.Hp <= 0:
+                    print("The enemy has lost all its health!!")
+                else:
+                    print("The enemy now has",BattleMob.Hp,"health remaining.")
+            elif action == "2":
+                if Player.c_type.lower() == 'm':
+                    print("Your special")
+                elif Player.c_type.lower() == 'a':
+                    print("f")
+                elif Player.c_type.lower() == 'k':
+                    print("f")
+        if Player.Hp >0:
+            print("You defeated",BattleMob.ID)
+            control.turnCount = 7
+            exit
+        elif Player.Hp == 0:
+            control.turnCount = 6
+            exit
+
+###################################
         
         
     def PlayerClass(self):
@@ -332,15 +387,15 @@ class controller():
             Enter 1 of the above class choices: ''')
             Char.name = input("What is your name?: ")
             if classType.lower() == "knight":
-                PlayerK = Knight(name,20,3,4,5,2,'k')
+                PlayerK = Knight(name,10,3,4,5,2,'k')
                 self.Player = PlayerK
                 return self.Player
             elif classType.lower() == "archer":
-                PlayerA = Archer(name,2,3,4,5,2,'a')
+                PlayerA = Archer(name,10,3,4,5,2,'a')
                 self.Player = PlayerA
                 return self.Player
             elif classType.lower() == "mage":
-                PlayerM = Mage(name,2,3,4,5,2,'m')
+                PlayerM = Mage(name,10,3,4,5,2,'m')
                 self.Player = PlayerM
                 return self.Player
             
@@ -413,12 +468,12 @@ class controller():
         run = True
         while run == True:
             #while self.turnCount <= 5:
-                if self.turnCount != 5:
+                if self.turnCount < 5:
                     GameWorld = Biome(['Red Wood National Park','The Spooky Woods','Hidden Grove',"The Witch's Hut"],
                         ['Mount Denali National Park','The Snowy Peaks','The Raging River','The Abandoned Cabin'],
                         ['The Grand Canyon','The Oasis',"Mars' Dunes",'The Hidden Cave'],'G')
                     GameWorld.PickAreaEvent(choice)
-                    fobjects = ["a hollowed out log","a patch of mushrooms","some brush","some small bush","a thorn patch","tall grass"]
+                    fobjects = ["a hollowed out log","a patch of mushrooms","some brushes","some small bush","a thorn patch","tall grass"]
                     dobjects = ["a tumble weed","a colorful cactus","a spikey cactus","a small dune","a patch of dead grass","an antelope skull","a large boulder"]
                     mobjects = ["a jagged rock","a smooth stone","a puddle","crevace","a patch of weeds","a mound of gravel","a mossy stone"]
                     entry = input("\nTo your left you see "+random.choice(fobjects)+ ". To your right you see "+random.choice(fobjects)+". Which do you search?: ")
@@ -436,14 +491,21 @@ class controller():
                     
                 elif self.turnCount == 6:
                     print("game over")
+                    controller.endCredits()
+                    break
                     
                 elif self.turnCount == 7:
                    print("put end game credits here")
+                   controller.endCredits()
+                   break
 
     def endGame():
-        Professor_Shuman = Boss(10,2,"Professor_Shuman")
+        Professor_Shuman = Boss(10,2,"Professor Shuman")
         BattleMob = Professor_Shuman
-        controller.TriggerBattle(BattleMob)
+        controller.TriggerBoss(BattleMob)
+
+    def endCredits():
+        print(creditPage)
 
 #-------------Openning Credits-------------------------------
 import time
@@ -458,6 +520,7 @@ for IT209 at George Mason University, Spring 2019.
 Ascii art wizard created by Morfina at www.asciiart.eu
 Ascii art knight created by fsc at http://ascii.co.uk
 Ascii art archer created by Erorppn Xrzavgm at http://ascii.co.uk
+Ascii art wolf created by bug at https://www.asciiart.eu/animals/wolves
 Ascii art dragon created by Joan at asciiart.website//joan/www.geocities.com
 '''
 
@@ -547,6 +610,75 @@ title = '''
  **
 '''
 
+zombieImg = '''
+                              _.--""-._
+  .                         ."         ".
+ / \    ,^.         /(     Y             |      )\
+/   `---. |--'\    (  \__..'--   -   -- -'""-.-'  )
+|        :|    `>   '.     l_..-------.._l      .'
+|      __l;__ .'      "-.__.||_.-'v'-._||`"----"
+ \  .-' | |  `              l._       _.'
+  \/    | |                   l`^^'^^'j
+        | |                _   \_____/     _
+        j |               l `--__)-'(__.--' |
+        | |               | /`---``-----'"1 |  ,-----.
+        | |               )/  `--' '---'   \'-'  ___  `-.
+        | |              //  `-'  '`----'  /  ,-'   I`.  \
+      _ L |_            //  `-.-.'`-----' /  /  |   |  `. \
+     '._' / \         _/(   `/   )- ---' ;  /__.J   L.__.\ :
+      `._;/7(-.......'  /        ) (     |  |            | |
+      `._;l _'--------_/        )-'/     :  |___.    _._./ ;
+        | |                 .__ )-'\  __  \  \  I   1   / /
+        `-'                /   `-\-(-'   \ \  `.|   | ,' /
+                           \__  `-'    __/  `-. `---'',-'
+                              )-._.-- (        `-----'
+                             )(  l\ o ('..-.
+                       _..--' _'-' '--'.-. |
+                __,,-'' _,,-''            \ \
+               f'. _,,-'                   \ \
+              ()--  |                       \ \
+                \.  |                       /  \
+                  \ \                      |._  |
+                   \ \                     |  ()|
+                    \ \                     \  /
+                     ) `-.                   | |
+                    // .__)                  | |
+                 _.//7'                      | |
+               '---'                         j_| `
+                                            (| |
+                                             |  \
+                                             |lllj
+                                             |||||
+'''
+wolfImg = '''
+                              __
+                            .d$$b
+                          .' TO$;\
+                         /  : TP._;
+                        / _.;  :Tb|
+                       /   /   ;j$j
+                   _.-"       d$$$$
+                 .' ..       d$$$$;
+                /  /P'      d$$$$P. |\
+               /   "      .d$$$P' |\^"l
+             .'           `T$P^"""""  :
+         ._.'      _.'                ;
+      `-.-".-'-' ._.       _.-"    .-"
+    `.-" _____  ._              .-"
+   -(.g$$$$$$$b.              .'
+     ""^^T$$$P^)            .(:
+       _/  -"  /.'         /:/;
+    ._.'-'`-'  ")/         /;/;
+ `-.-"..--""   " /         /  ;
+.-" ..--""        -'          :
+..--""--.-"         (\      .-(\
+  ..--""              `-\(\/;`
+    _.                      :
+                            ;`-
+                           :\
+                           ;
+
+'''
 knightImg = '''
                           ,dM
                          dMMP
