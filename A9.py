@@ -18,11 +18,10 @@ def clear():
         _ = system('clear')
 
 class Char():
-    def __init__(self, Name, Hp, Att, Def, Sp):   #Added Sp for Speical Move funcationality
+    def __init__(self, Name, Hp, Att, Sp):   #Added Sp for Speical Move funcationality
         self.Name= str(Name)
         self.Hp= int(Hp)
         self.Att= int(Att)
-        self.Def= int(Def)
         self.Sp = int(Sp)
         #self.Bag = []                       #Change from UML Char has bag rather than UI
 
@@ -33,64 +32,72 @@ class Char():
         #for i in bag:
             #print i
 
-    def Use_Ability(Move, Move_Cost, Name, Type):
+    def Use_Ability(self,Move, Move_Cost, Name, Type):
         if self.Mag >= Move_Cost:
             self.Mag -= Move_Cost
             if Type == "Att":
-                self.Att += Move
+                Move_Type = "Att"
+                print(self.name,' uses ',Name,'! Dealing',Move,'damage. Now ',self.name,'has',self.Mag,' Mag left.')
+                return Move_Type
+                #self.Att += Move
             if Type == "Hp":
-                self.Hp += Move
-            print(self.name,' uses ',name,'!')
+                Move_Type = "Hp"
+                print(self.name,' uses ',Name,'! Gaining',Move,"Now ",self.name,'has',self.Mag,' Mag left.')
+                return Move_Type
+                #self.Hp += Move
         else:
             print("You do not have enough Magic for that!")
 
 class Mage(Char):
-    def __init__(self, Name, Hp, Att, Def, Sp, Mag, c_type):
-        super().__init__(Name, Hp, Att, Def, Sp)
+    def __init__(self, Name, Hp, Att, Sp, Mag, c_type, Move_Cost):
+        super().__init__(Name, Hp, Att, Sp)
         self.Mag = 4
         self.c_type = 'm'
+        self.Move_Cost = 1
 
     def __str__(self):
-        print(wizardImg)
+        print("put drawing in here")
 
     def Ability(self):
         Name = "FireBall"
         Move = self.Sp + 3
-        Move_Cost = 1
+        #Move_Cost = 1
         Type = "Att"
-        self.Use_Ability(Move, Move_Cost, Name, Type)
+        return self.Use_Ability(Move, self.Move_Cost, Name, Type)
 
 class Knight(Char):
-    def __init__(self, Name, Hp, Att, Def, Sp, Mag, c_type):
-        super().__init__(Name, Hp, Att, Def, Sp)
+    def __init__(self, Name, Hp, Att, Sp, Mag, c_type, Move_Cost):
+        super().__init__(Name, Hp, Att, Sp)
         self.Mag = 4
         self.c_type = 'k'
+        self.Move_Cost = 1
 
     def __str__(self):
-        print(knightImage)
+        print("put drawing in here")
 
     def Ability(self):
         Name = "Heal"
         Move = self.Sp + 2
-        Move_Cost = 1
+        #Move_Cost = 1
         Type = "Hp"
-        self.Use_Ability(Move, Move_Cost, Name, Type)
+        return self.Use_Ability(Move, self.Move_Cost, Name, Type)
 
 class Archer(Char):
-    def __init__(self, Name, Hp, Att, Def, Sp, Mag, c_type):
-        super().__init__(Name, Hp, Att, Def, Sp)
+    def __init__(self, Name, Hp, Att, Sp, Mag, c_type, Move_Cost):
+        super().__init__(Name, Hp, Att, Sp)
         self.Mag = 4
         self.c_type = 'a'
+        self.Move_Cost = 1
 
     def __str__(self):
-        print(archerImg)
+        print("put drawing in here")
 
     def Ability(self):
         Name = "Rain Arrows"
         Move = self.Sp + 2
-        Move_Cost = 1
+        #Move_Cost = 1
         Type = "Att"
-        self.Use_Ability(Move, Move_Cost, Name, Type)
+        return self.Use_Ability(Move, self.Move_Cost, Name, Type)
 #---------------Character Class Above, Enemy Below -----------------------------------
 class Mob():
     def __init__(self, Hp, Att):   #Added Sp for Speical Move funcationality
@@ -288,8 +295,11 @@ class controller():
                 break
             else:
                 pass
-            print("What will you do?")
-            action = input("1. for basic attack 2. to use your special: ") #put validtoin here
+            print("\n\nWhat will you do?")
+            print("Player Health:",Player.Hp)
+            print("Player Attack:",Player.Att,)
+            print("You have",Player.Mag,"Magic left. Player Special Cost:",Player.Move_Cost,)
+            action = input("\n1. for basic Attack\n2. to use your Special:") #put validtoin here
             if action == "1":
                 BattleMob.Hp -= Player.Att
                 print("You attack the",BattleMob.ID,"!")
@@ -297,14 +307,14 @@ class controller():
                 if BattleMob.Hp <= 0:
                     print("The enemy has lost all its health!!")
                 else:
-                    print("The enemy now has",BattleMob.Hp,"health remaining.")
+                    print("\nThe enemy now has",BattleMob.Hp,"health remaining.")
             elif action == "2":
-                if Player.c_type.lower() == 'm':
-                    print("Your special")
-                elif Player.c_type.lower() == 'a':
-                    print("f")
-                elif Player.c_type.lower() == 'k':
-                    print("f")
+                Move_Type = []
+                Move_Type.append(Player.Ability())
+                if Move_Type[0] == "Att":
+                    BattleMob.Hp -= Player.Att + Player.Sp
+                else:
+                    Player.Hp += Player.Sp + 2
         if Player.Hp >0:
             print("You defeated a",BattleMob.ID)
         elif Player.Hp == 0:
@@ -337,8 +347,11 @@ class controller():
                 break
             else:
                 pass
-            print("What will you do?")
-            action = input("1. for basic attack 2. to use your special: ") #put validtoin here
+            print("\n\nWhat will you do?")
+            print("Player Health:",Player.Hp)
+            print("Player Attack:",Player.Att,)
+            print("You have",Player.Mag,"Magic left. Player Special Cost:",Player.Move_Cost,)
+            action = input("\n1. for basic Attack\n2. to use your Special:") #put validtoin here
             if action == "1":
                 BattleMob.Hp -= Player.Att
                 print("You attack the",BattleMob.ID,"!")
@@ -346,19 +359,19 @@ class controller():
                 if BattleMob.Hp <= 0:
                     print("The enemy has lost all its health!!")
                 else:
-                    print("The enemy now has",BattleMob.Hp,"health remaining.")
+                    print("\nThe enemy now has",BattleMob.Hp,"health remaining.")
             elif action == "2":
-                if Player.c_type.lower() == 'm':
-                    print("Your special")
-                elif Player.c_type.lower() == 'a':
-                    print("f")
-                elif Player.c_type.lower() == 'k':
-                    print("f")
+                Move_Type = []
+                Move_Type.append(Player.Ability())
+                if Move_Type[0] == "Att":
+                    BattleMob.Hp -= Player.Att + Player.Sp
+                else:
+                    Player.Hp += Player.Sp + 2
         if Player.Hp >0:
             print("You defeated",BattleMob.ID)
             control.turnCount = 7
             exit
-        elif Player.Hp == 0:
+        elif Player.Hp <= 0:
             control.turnCount = 6
             exit
 
@@ -387,15 +400,15 @@ class controller():
             Enter 1 of the above class choices: ''')
             Char.name = input("What is your name?: ")
             if classType.lower() == "knight":
-                PlayerK = Knight(name,10,3,4,5,2,'k')
+                PlayerK = Knight(name,20,3,4,5,'k',1)
                 self.Player = PlayerK
                 return self.Player
             elif classType.lower() == "archer":
-                PlayerA = Archer(name,10,3,4,5,2,'a')
+                PlayerA = Archer(name,2,3,4,5,'a',1)
                 self.Player = PlayerA
                 return self.Player
             elif classType.lower() == "mage":
-                PlayerM = Mage(name,10,3,4,5,2,'m')
+                PlayerM = Mage(name,2,3,4,5,'m',1)
                 self.Player = PlayerM
                 return self.Player
             
