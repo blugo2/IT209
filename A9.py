@@ -140,7 +140,11 @@ class Boss(Mob):
         self.Moves= ["Python Mastery","Lazer Eyes","Fire Breath","One Inch Punch"]
         
     def __str__(self):
-        print("put drawing in here")
+        return("put drawing in here")
+        
+    def openmsg(self):
+        return("The rain bends and curves around the figure, creating a sphear of air with no rain. This sphear extends itself towards you and blocks the rain from falling, allowing you to see. \n\n'I am the gurdian of this world, and you have tresspassed here long enough. Its time to send you where you belong.'\n\nNow that you can clearly see, you read the name tag on the figure. It says Professor Shuman, Python Master. Before you have time to speak he attacks!")
+
 #-------------------Enemies Above, Biome Below--------------------
 class Biome():
     def __init__(self,Forest_Area, Mountian_Area, Sand_Area, choice):
@@ -263,6 +267,7 @@ class controller():
             print("Oof, bad luck... You didn't find anything.")
 
     def TriggerBattle(BattleMob):
+        clear()
         BattleMob = BattleMob
         print(BattleMob)
         print(BattleMob.openmsg())
@@ -329,12 +334,13 @@ class controller():
             
     def startWorld(self):
         clear()
+
         print("Welcome, ",self.Player.name,"...")
         print('''
         Before you, you see mountains made of a dark black rock. They look dangerous,
         but the reward has to be worth it... right?
-        To the left, you notice a large forest. Probably some cute squirrels or something
-        To your right, you see a desert in the distance. Looks dry. I bet there's a nice
+        To the left you notice an large forest. Probably some cute squirrels or something
+        To your right you see a desert in the distance. Looks dry. I bet there's a nice
         tanning spot down this way.
         ''')
         choice = input(
@@ -352,55 +358,78 @@ class controller():
             -- Desert
             Would you like to go to the mountains, forest, or desert?(F,M,D): ''')
         if choice.upper() == "F":                                                         #Valor text about which area to choose
+            cloud = "Forest"
             print("""
             With the wind in your hair and bugs chittering around you, you head towards the 
             large forest. You have spent some time travelling along the well worn dirt path
-            beneath your feet when your senses begin to notice something. That cute squirrel perhaps?
+            beneath your feat when your senses spot something. That cute squireel perhaps?
             You stop and gather in your surroundings...""")
                 
         elif choice.upper() == "M":
+            cloud = "Mountains"
             print("""
-            You decide to head towards the mountains made of a dark, ancient stone. As you get
-            closer, you spot a winding trail that grips to the edge of one of the mountains. By
-            the time you have made it to the begining of the trail, the air is cold and stale.
-            Something about this mountain makes your skin crawl. You decied to stop, catch your
-            breath, and take in your surroundings...
+            You decide to head towards the mountain made of dark rock. As you get closer you
+            spot a winding trail that grips to the mountains edge. By the time you have made it
+            to the begining of the trail, the air is cold and stale. Something about this
+            mountain makes your skin crawl. You decied to stop, catch your breath, and take
+            in your surroundings...
             """)
         elif choice.upper() == "D":
+            cloud = "Desert"
             print("""
             You trod down the slopes towards the desert. With the sand blowing past your
-            face and the sun beating down your neck, you feel confident in your choice.
+            face and the sun beating down your neck you feel confident in your choice.
             As you walk, you begin to notice high dunes besides you and you wonder how
-            long they have stood. In the distance, you hear a sharp cackle and your hair
+            long they have stood. In the distance you hear a sharp jackle and your hair
             stands on edge. Perhaps someone, or something, is also wandering among the
             dunes. You stand at ease and being to take in your surroundings...
             """)
-        #GameWorld = Biome(['Red Wood National Park','The Spooky Woods','Hidden Grove',"The Witch's Hut"],
-        #        ['Mount Denali National Park','The Snowy Peaks','The Raging River','The Abandoned Cabin'],
-        #        ['The Grand Canyon','The Oasis',"Mars' Dunes",'The Hidden Cave'],'G')
-        #GameWorld.PickArea(choice)
-        #GameWorld.PickAreaEvent(choice)
-        self.turnCount += 1
+            
+        CloudMsg = [("As you continue along your journey,  you stop to gaze up upon the clouds. A curious thing catchs your eye. In the distance you can see waht you can only describe as a faint, dark object on the horizen. You blink and its gone, hopefully it was nothing."),
+                    ("Having progessed further along towards your destination you stop to take a rest. Before your eyes fully close you note that the object on the horizion you saw eariler has reappeared, bigger in size yet still quit some distance away. You note that it may be a strom, but quickly dirft to sleep."),
+                    ("Now that you have made considerable progress through the area you are suddenly aware of a dark presence near you. You look up and realize that the dark object from before was indeed a storm, a big one too as it apears. Hopefully you reach your destination before it hits you..."),
+                    ("The storm is making quick  time, and you feel the air around get colder. The air tastes moist, and the sky is grey. You quickly push on towards the center of this area!"),
+                    ("The storm is upon you! The edge of the storm is quickly gaining ground on you, try as you might you are not able to outrun it. The sky turns dark around you, and thick heavy droplets press against your skin. Lighting crackles and momentairy lights your path. You breifly see a figure standing before you, it seems to be the epicentor of the storm...")]
         
-        while self.turnCount < 5:
-            GameWorld = Biome(['Red Wood National Park','The Spooky Woods','Hidden Grove',"The Witch's Hut"],
+        GameWorld = Biome(['Red Wood National Park','The Spooky Woods','Hidden Grove',"The Witch's Hut"],
                 ['Mount Denali National Park','The Snowy Peaks','The Raging River','The Abandoned Cabin'],
                 ['The Grand Canyon','The Oasis',"Mars' Dunes",'The Hidden Cave'],'G')
-            GameWorld.PickAreaEvent(choice)
-            fobjects = ["a hollowed out log","a patch of mushrooms",'a puddle teaming with life',"some brush","some small bushes","a thorn patch","tall grass"]
-            dobjects = ["a ragged looking tumble weed","a small, colorful cactus","a spikey cactus","a small dune","a patch of dead grass","an antelope skull","a large boulder"]
-            mobjects = ["a large, jagged rock","a worn boulder","a grimy puddle","a small crevace","a patch of weeds","a mound of gravel","a mossy stone"]
-            entry = input("\nTo your left you see "+random.choice(fobjects)+
-                ". To your right you see "+random.choice(fobjects)+". Which do you search?: ")
-            print("\n")
-            controller.TriggerItem(Player)
-            self.turnCount += 1
-      
-        controller.endGame()
+        GameWorld.PickArea(choice)
+        self.turnCount += 1
+        run = True
+        while run == True:
+            #while self.turnCount <= 5:
+                if self.turnCount != 5:
+                    GameWorld = Biome(['Red Wood National Park','The Spooky Woods','Hidden Grove',"The Witch's Hut"],
+                        ['Mount Denali National Park','The Snowy Peaks','The Raging River','The Abandoned Cabin'],
+                        ['The Grand Canyon','The Oasis',"Mars' Dunes",'The Hidden Cave'],'G')
+                    GameWorld.PickAreaEvent(choice)
+                    fobjects = ["a hollowed out log","a patch of mushrooms","some brush","some small bush","a thorn patch","tall grass"]
+                    dobjects = ["a tumble weed","a colorful cactus","a spikey cactus","a small dune","a patch of dead grass","an antelope skull","a large boulder"]
+                    mobjects = ["a jagged rock","a smooth stone","a puddle","crevace","a patch of weeds","a mound of gravel","a mossy stone"]
+                    entry = input("\nTo your left you see "+random.choice(fobjects)+ ". To your right you see "+random.choice(fobjects)+". Which do you search?: ")
+                    print("\n")
+                    controller.TriggerItem(Player)
+                    input("Hit Enter to Move on...")
+                    time.sleep(2)
+                    clear()
+                    print("\n\n",CloudMsg[self.turnCount - 1].strip("'"),"\n\n")
+                    self.turnCount += 1
+                    input("Hit Enter to Move on...")
+                    
+                elif self.turnCount == 5:
+                    controller.endGame()
+                    
+                elif self.turnCount == 6:
+                    print("game over")
+                    
+                elif self.turnCount == 7:
+                   print("put end game credits here")
 
-
-    def endGame(self):
-            print("boss")
+    def endGame():
+        Professor_Shuman = Boss(10,2,"Professor_Shuman")
+        BattleMob = Professor_Shuman
+        controller.TriggerBattle(BattleMob)
 
 #-------------Openning Credits-------------------------------
 import time
