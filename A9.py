@@ -8,6 +8,8 @@
 print("Welcome to the start of Assignment 9...")
 from os import system, name
 import random
+#clear function created by mohit_negi @ Geeksforgeeks.com
+#https://www.geeksforgeeks.org/clear-screen-python/
 def clear(): 
   
     # for windows 
@@ -540,11 +542,19 @@ import random
 creditPage = '''
    Written by Billy Duggleby and Brendon Lugo
 for IT209 at George Mason University, Spring 2019.
+
 Ascii art wizard created by Morfina at www.asciiart.eu
+
 Ascii art knight created by fsc at http://ascii.co.uk
+
 Ascii art archer created by Erorppn Xrzavgm at http://ascii.co.uk
+
 Ascii art wolf created by bug at https://www.asciiart.eu/animals/wolves
+
 Ascii art dragon created by Joan at asciiart.website//joan/www.geocities.com
+
+Clear function created by mohit_negi @ Geeksforgeeks.com
+https://www.geeksforgeeks.org/clear-screen-python/
 '''
 
 
