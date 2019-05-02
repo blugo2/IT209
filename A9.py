@@ -1,8 +1,9 @@
 #-------------------------------------------------------------------------+
 #Program name: IT209_A9.py                                                |
-#Author: Brendon Lugo and William Dugbly                                  |
+#Authors: Brendon Lugo                                                    |
+#          William Duggleby                                               |
 #Date Written: 4/17/19                                                    |
-#Purpose: Assignment 9                                                    |  
+#Purpose: Assignment 9 for IT209 and George Mason University              |  
 #-------------------------------------------------------------------------+
 print("Welcome to the start of Assignment 9...")
 from os import system, name
