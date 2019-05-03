@@ -150,10 +150,11 @@ class Boss(Mob):
         self.Moves= ["Python Mastery","Lazer Eyes","Fire Breath","One Inch Punch"]
         
     def __str__(self):
-        return("put drawing in here")
+        return(Shuman)
         
     def openmsg(self):
-        return("The rain bends and curves around the figure, creating a sphear of air with no rain. This sphear extends itself towards you and blocks the rain from falling, allowing you to see. \n\n'I am the gurdian of this world, and you have tresspassed here long enough. Its time to send you where you belong.'\n\nNow that you can clearly see, you read the name tag on the figure. It says Professor Shuman, Python Master. Before you have time to speak he attacks!")
+        return("The storm is upon you! The edge of the storm is quickly gaining ground on you,\ntry as you might you are not able to out run it. The sky turns dark around you, and thick, heavy droplets\n rain down against your skin. Lighting crackles and momentairy lights your path.\nYou breifly see a figure standing before you. They seem to be the epicentor of the storm..." +
+               "The rain bends and curves around the figure, creating a sphear of air with no rain. This sphear extends itself towards you and blocks the rain from falling, allowing you to see. \n\n'I am the gurdian of this world, and you have tresspassed here long enough. Its time to send you where you belong.'\n\nNow that you can clearly see, you read the name tag on the figure. It says Professor Shuman, Python Master. Before you have time to speak he attacks!")
 
 #-------------------Enemies Above, Biome Below--------------------
 class Biome():
@@ -261,22 +262,22 @@ class controller():
     
     def TriggerMob():
         itemPickup = random.randint(1,10)
-        if itemPickup in range(1,3):
-            zombieMob = Zombie(4,2,"Zombie")
+        if itemPickup in range(1,4):
+            zombieMob = Zombie(7,2,"Zombie")
             BattleMob = zombieMob
-            controller.TriggerBattle(BattleMob)
-        elif itemPickup in range(4,5):
+            controller.TriggerBattle(BattleMob,zombieAtt,wolfAtt,dragonAtt)
+        elif itemPickup in range(5,6):
             wolfMob = Wolf(10,2,"Wolf")
             BattleMob = wolfMob
-            controller.TriggerBattle(BattleMob)
-        elif itemPickup == 6:
-            dragonMob = Dragon(10,2,"Dragon")
+            controller.TriggerBattle(BattleMob,zombieAtt,wolfAtt,dragonAtt)
+        elif itemPickup in range(7,9):
+            dragonMob = Dragon(12,3,"Dragon")
             BattleMob = dragonMob
-            controller.TriggerBattle(BattleMob)
+            controller.TriggerBattle(BattleMob,zombieAtt,wolfAtt,dragonAtt)
         else:
             print("Oof, bad luck... You didn't find anything.")
 
-    def TriggerBattle(BattleMob):
+    def TriggerBattle(BattleMob,zombieAtt,wolfAtt,dragonAtt):
         BattleMob = BattleMob
         print(BattleMob)
         print(BattleMob.openmsg())
@@ -285,9 +286,24 @@ class controller():
             if BattleMob_Turn == 1:
                 Player.Hp -= BattleMob.Att
                 if Player.Hp >0:
+                    if BattleMob == 'Zombie':
+                        print("PPOPOPOP")
+                        print(zombieAtt)
+                    elif BattleMob == 'Wolf':
+                        print("PPOPOPOP")
+                        print(wolfAtt)
+                    elif BattleMob =='Dragon':
+                        print("PPOPOPOP")
+                        print(dragonAtt)
                     print("The enemy attacks with",random.choice(BattleMob.Moves),
                                   "- You have", Player.Hp,"health remaining.")
                 else:
+                    if BattleMob == 'Zombie':
+                        print(zombieAtt)
+                    elif BattleMob == 'Wolf':
+                        print(wolfAtt)
+                    elif BattleMob =='Dragon':
+                        print(dragonAtt)
                     print("The enemy attacks with a",random.choice(BattleMob.Moves),
                                   "- You have 0 health. You died!!")
                     break
@@ -305,6 +321,12 @@ class controller():
             action = input("\n1. for basic Attack\n2. to use your Special:") #put validtoin here
             if action == "1":
                 BattleMob.Hp -= Player.Att
+                if Player.c_type == 'm':
+                    print(mageAtt)
+                elif Player.c_type == 'k':
+                    print(knightAtt)
+                elif Player.c_type =='a':
+                    print(archerAtt)
                 print("You attack the",BattleMob.ID,"!")
                 
                 if BattleMob.Hp <= 0:
@@ -316,8 +338,15 @@ class controller():
                 Move_Type.append(Player.Ability())
                 if Move_Type[0] == "Att":
                     BattleMob.Hp -= Player.Att + Player.Sp
+                    if Player.c_type == 'm':
+                        print(mageSp)
+                    elif Player.c_type =='a':
+                        print(archerSp)
                 else:
                     Player.Hp += Player.Sp + 2
+                    if Player.c_type == 'k':
+                        print(knightSp)
+                
         if Player.Hp >0:
             print("You defeated a",BattleMob.ID)
         elif Player.Hp == 0:
@@ -337,10 +366,28 @@ class controller():
             if BattleMob_Turn == 1:
                 Player.Hp -= BattleMob.Att
                 if Player.Hp >0:
-                    print("The enemy attacks with",random.choice(BattleMob.Moves),
+                    attack = random.choice(BattleMob.Moves)
+                    if attack == "Python Mastery":
+                        print(ShumanPM)
+                    elif attack == "Lazer Eyes" :
+                        print(ShumanLE)
+                    elif attack == "Fire Breath":
+                        print(ShumanFB)
+                    elif attack == "One Inch Punch":
+                        print(ShumanOip)
+                    print("The enemy attacks with",attack,
                                   "- You have", Player.Hp,"health remaining.")
                 else:
-                    print("The enemy attacks with a",random.choice(BattleMob.Moves),
+                    attack = random.choice(BattleMob.Moves)
+                    if attack == "Python Mastery":
+                        print(ShumanPM)
+                    elif attack == "Lazer Eyes" :
+                        print(ShumanLE)
+                    elif attack == "Fire Breath":
+                        print(ShumanFB)
+                    elif attack == "One Inch Punch":
+                        print(ShumanOip)
+                    print("The enemy attacks with a",attack,
                                   "- You have 0 health. You died!!")
                     break
             else:
@@ -357,6 +404,12 @@ class controller():
             action = input("\n1. for basic Attack\n2. to use your Special:") #put validtoin here
             if action == "1":
                 BattleMob.Hp -= Player.Att
+                if Player.c_type == 'm':
+                    print(mageAtt)
+                elif Player.c_type == 'k':
+                    print(knightAtt)
+                elif Player.c_type == 'a':
+                    print(archerAtt)
                 print("You attack the",BattleMob.ID,"!")
                 
                 if BattleMob.Hp <= 0:
@@ -417,7 +470,13 @@ class controller():
             
     def startWorld(self):
         clear()
-
+        if Player.c_type == 'm':
+            print(wizardImg)
+        elif Player.c_type == 'a':
+            print(archerImg)
+        elif Player.c_type == 'k':
+            print(knightImg)
+        
         print("Welcome, ",self.Player.name,"...")
         print('''
         Before you, you see mountains made of a dark black rock. They look dangerous,
@@ -683,6 +742,28 @@ zombieImg = '''
                                              |lllj
                                              |||||
 '''
+zombieAtt = '''/
+   ..............
+   ::::::::::::::::::
+  :::::::::::::::
+ :::`::::::: :::     :
+ :::: ::::: :::::    :
+ :`   :::::;     :..~~
+ :   ::  :::.     :::.
+ :...`:, :::::...:::
+::::::.  :::::::::'
+ ::::::::|::::::::  !
+ :;;;;;;;;;;;;;;;;']}
+ ;--.--.--.--.--.-
+  \/ \/ \/ \/ \/ \/
+     :::       ::::
+      :::      ::
+     :\:      ::
+   /\::    /\:::
+ ^.:^:.^^^::`::
+ ::::::::.::::
+  .::::::::::
+'''
 wolfImg = '''
                               __
                             .d$$b
@@ -712,6 +793,15 @@ wolfImg = '''
                            ;
 
 '''
+wolfAtt = '''\
+             _     ___
+            #_~`--'__ `===-,
+            `.`.     `#.,//
+            ,_\_\     ## #\
+            `__.__    `####\          unknown
+                 ~~\ ,###'~
+                    \##'
+'''
 knightImg = '''
                           ,dM
                          dMMP
@@ -739,6 +829,40 @@ knightImg = '''
                    (     / 
                     `---'
 '''
+knightAtt = '''\
+           _____   _____
+          /     \ /     \
+     ,   |       '       |
+     I __L________       L__
+O====IE__________/     ./___>
+     I      \.       ./
+     `        \.   ./
+                \ /
+                 '
+
+'''
+knightSp = '''\
+       @@@@@@           @@@@@@
+      @@@@@@@@@@       @@@@@@@@@@
+    @@@@@@@@@@@@@@   @@@@@@@@@@@@@@
+  @@@@@@@@@@@@@@@@@ @@@@@@@@@@@@@@@@@
+ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+      @@@@@@@@@@@@@@@@@@@@@@@@@@@
+        @@@@@@@@@@@@@@@@@@@@@@@
+          @@@@@@@@@@@@@@@@@@@
+            @@@@@@@@@@@@@@@
+              @@@@@@@@@@@
+                @@@@@@@
+                  @@@
+                   @
+'''
 
 wizardImg ='''
                     / \\
@@ -763,6 +887,33 @@ wizardImg ='''
      _.-'    /     Bb     '-. '-._ 
  _.-'       |      BBb       '-.  '-. 
 (___________\____.dBBBb.________)____)
+'''
+mageAtt = '''\
+     _.-^^---....,,--       
+ _--                  --_  
+<                        >)
+|                         | 
+ \._                   _./  
+    ```--. . , ;.--' ''       
+          | |   |             
+       .-=||  | |=-.   
+       `-=#$%&%$#=-'   
+          | ;  :|     
+ _____.,-#%&$@%#&#~,._____
+'''
+mageSp = '''\
+                             ____
+                     __,-~~/~    `---.
+                   _/_,---(      ,    )
+               __ /        <    /   )  \___
+- ------===;;;'====------------------===;;;===----- -  -
+                  \/  ~"~"~"~"~"~\~"~)~"/
+                  (_ (   \  (     >    \)
+                   \_( _ <         >_>'
+                      ~ `-i' ::>|--"
+                          I;|.|.|
+                         <|i::|i|`.
+                        (` ^'"`-' ")
 '''
 
 archerImg = '''
@@ -800,7 +951,83 @@ archerImg = '''
                                                       \\|.
                                                        /.
 '''
+archerAtt = '''\
+                     z$6*#""""*c     :@$$****$$$$L
+                  .@$F          "N..$F         '*$$
+                 /$F             '$P             '$$r
+                d$"                                #$      '%C"""$
+               4$F                                  $k    ud@$ JP
+               M$                                   J$*Cz*#" Md"
+               MR                              'dCum#$       "
+               MR                               )    $
+               4$                                   4$
+                $L                                  MF
+                '$                                 4$
+                 ?B .z@r                           $
+               .+(2d"" ?                          $~
+    +$c  .z4Cn*"   "$.                           $
+'#*M3$Eb*""         '$c                         $
+   /$$RR              #b                      .R
+   6*"                 ^$L                   JF
+                         "$                 $
+                           "b             u"
+                             "N.        xF
+                               '*c    zF
+                                  "N@"
 
+'''
+archerSp = '''\
+]z
+           `@@_
+            @@@L
+      .d@L,]@@@@L,
+-z__   ]@@@a@@@@@@_
+ `@@@@zza@@@@@@@@@@L
+  `]@@@@@@@@@@@@@@@@@_
+    `@@@@@@@@@@@@@@@@@L
+     `-@@@@@@@@@@@@@@@@'
+       `@@@@@@@@@@@@@@[
+        `@@@@@@@@@@@@@[
+          ]@@@@@@@@@@@[
+           "~~~~-@@@@@@,
+                  "~-@@@_
+                     ~@@@L
+                      `@@@L_
+                       `~@@@L
+                         `@@@z,
+                          `]@@@_
+                            `@@@z
+                             `]@@L_
+                               ~@@@z
+                                `@@@z,
+                                 `]@@@L
+                                   `@@@z
+                                     ]@@L,
+                                      ~@@@z
+                                       "@@@z
+                                        `-@@@_
+                                          ~@@@_
+                                           `@@@z
+                                            `-@@@_
+                                              ]@@@_
+                                               "@@@z
+                                                `]@@L,
+                                                  `@@@L
+                                                   `@@@z,
+                                                    `-@@@_
+                                                      `@@@L
+                                                       `@@@L    ]e
+                                                         ~@@b_  a@b
+                                                          `@@@e]@@L
+                                                    -zzzz___@@@U@@@,
+                                                      "~-@@@@@@@@@@@
+                                                         `~-@@@@@@@@L
+                                                            "~-@@@@@@,
+                                                               "~@@@@L
+                                                                 `~@@@e
+                                                                    ~@@_
+                                                                      ~@
+'''
 dragon = '''\
                                                     ___
                                                   .~))>>
@@ -835,14 +1062,99 @@ dragon = '''\
                                   ((((          __.-~ _.-~
                                               <.~~~.~'
 '''
+dragonAtt = '''\
+Art by Shanaka Dias
+ <>=======() 
+(/\___   /|\\          ()==========<>_
+      \_/ | \\        //|\   ______/ \)
+        \_|  \\      // | \_/
+          \|\/|\_   //  /\/
+           (oo)\ \_//  /
+          //_/\_\/ /  |
+         @@/  |=\  \  |
+              \_=\_ \ |
+                \==\ \|\_ snd
+             __(\===\(  )\
+            (((~) __(_/   |
+                 (((~) \  /
+                 ______/ /
+                 '------'
+'''
+
+Shuman = '''\██████████████████████──
+██████████████████████──
+█░░██████████████░░░██──
+█░░░░██████████░░░░███──
+█░░░░░░██████░░░░░████──
+█░░░░░░░███░░░░░░█████──
+█░░░░░░░░░░░░░░░░░████──
+██████░░░███████░░░███──
+█░░░░░░█░░░░░░░░░░░░██──
+█░░░░░░█░░░░░░░░░░░░░███
+█░▄▀▀███░░▄▀▀██▄░░░░░░░█
+█░█─████░░█─████░░░░░░░█
+█░█▄████░░█▄████░░░░░░░█
+█░░░░░░█░░░░░░░░░░░░░███
+█░░░░░░█░░░░░░░░░░░░░█──
+█░░░░░░█░░░░░░░░░░░░░█──
+█░░░░░░███░░░█░░░░░░░█──
+█░░░░░░░░█░░█░░░░░░░░█──
+█░░░░░░░░█░█░░░░░░░░░█──
+█░░░░░░░░██░░░░░░░░░░█──
+█░░░░░░░░░░░░░░░░░░░░█──
+█░░░░░░░░░░░░░░░░░░░░█──
+█░░░░░░░░░░░░░░░░░░░░█──
+██████████░░░░░░░░████──
+───────█─██░░░░░░██──█──
+───────█──███░░███───█──
+───────█────████─────█──
+───────█─────██──────█──
 
 
+'''
+ShumanPM = '''\
+             ____
+            / . .\
+MT          \  ---<
+             \  /
+   __________/ /
+-=:___________/
+'''
+ShumanLE = '''\
+ _                         
+| |                        
+| | __ _ ___  ___ _ __ ___ 
+| |/ _` / __|/ _ \ '__/ __|
+| | (_| \__ \  __/ |  \__ \
+|_|\__,_|___/\___|_|  |___/
+'''
+ShumanFB = '''\
+               (  .      )
+           )           (              )
+                 .  '   .   '  .  '  .
+        (    , )       (.   )  (   ',    )
+         .' ) ( . )    ,  ( ,     )   ( .
+      ). , ( .   (  ) ( , ')  .' (  ,    )
+     (_,) . ), ) _) _,')  (, ) '. )  ,. (' )
+ jgs^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+'''
+ShumanOip = '''\
 
-            
+                        _    ,-,    _
+                 ,--, /: :\/': :`\/: :\
+                |`;  ' `,'   `.;    `: |
+                |    |     |  '  |     |.
+                | :  |     | pb  |     ||
+                | :. |  :  |  :  |  :  | \
+                 \__/: :.. : :.. | :.. |  )
+                      `---',\___/,\___/ /'
+                           `==._ .. . /'
+                                `-::-'
+'''
 
 
 control = controller(0,0,title,choose,0)
 Player = control.PlayerClass()
 control.startWorld()
-
+input("\n\nHit enter to exit the game")
 #Comment turn counter increase dark clouds recycle strs with while loop
