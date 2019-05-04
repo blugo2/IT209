@@ -123,7 +123,7 @@ class Wolf(Mob):
     def __init__(self, Hp, Att, ID):
         super().__init__(Hp, Att)
         self.ID = str(ID)
-        self.Moves= ["Howlof the pack","Chomp","Claw","Tail Whip"]
+        self.Moves= ["a loud howl","a fierce bite","a swift claw","a powerful tail Whip"]
         
     def __str__(self):
         return(wolfImg)
@@ -135,7 +135,7 @@ class Zombie(Mob):
     def __init__(self, Hp, Att, ID):
         super().__init__(Hp, Att)
         self.ID = str(ID)
-        self.Moves= ["Bite","Claw","Screech","Decaying Burst"]
+        self.Moves= ["a fierce bite","a heavy claw","a loud screech","a decaying burst of ancient energy"]
         
     def __str__(self):
         return(zombieImg)
@@ -150,11 +150,11 @@ class Boss(Mob):
         self.Moves= ["Python Mastery","Lazer Eyes","Fire Breath","One Inch Punch"]
         
     def __str__(self):
-        return(Shuman)
+        return(profImg)
         
     def openmsg(self):
         return("The storm is upon you! The edge of the storm is quickly gaining ground on you,\ntry as you might you are not able to out run it. The sky turns dark around you, and thick, heavy droplets\n rain down against your skin. Lighting crackles and momentairy lights your path.\nYou breifly see a figure standing before you. They seem to be the epicentor of the storm..." +
-               "The rain bends and curves around the figure, creating a sphear of air with no rain. This sphear extends itself towards you and blocks the rain from falling, allowing you to see. \n\n'I am the gurdian of this world, and you have tresspassed here long enough. Its time to send you where you belong.'\n\nNow that you can clearly see, you read the name tag on the figure. It says Professor Shuman, Python Master. Before you have time to speak he attacks!")
+               "\mThe rain bends and curves around the figure, creating a sphere of air with no rain. This sphere extends itself\ntowards you and blocks the rain from falling, allowing you to see. \n\nI am the gurdian of this world, and you have tresspassed here long enough.\nIts time to send you where you belong.\n\nNow that you can clearly see, you read the name tag on the figure. It says Professor Shuman, Python Master.\nBefore you have time to speak he attacks!")
 
 #-------------------Enemies Above, Biome Below--------------------
 class Biome():
@@ -286,23 +286,20 @@ class controller():
             if BattleMob_Turn == 1:
                 Player.Hp -= BattleMob.Att
                 if Player.Hp >0:
-                    if BattleMob == 'Zombie':
-                        print("PPOPOPOP")
+                    if BattleMob.ID == 'Zombie':
                         print(zombieAtt)
-                    elif BattleMob == 'Wolf':
-                        print("PPOPOPOP")
+                    elif BattleMob.ID == 'Wolf':
                         print(wolfAtt)
-                    elif BattleMob =='Dragon':
-                        print("PPOPOPOP")
+                    elif BattleMob.iD =='Dragon':
                         print(dragonAtt)
                     print("The enemy attacks with",random.choice(BattleMob.Moves),
                                   "- You have", Player.Hp,"health remaining.")
                 else:
-                    if BattleMob == 'Zombie':
+                    if BattleMob.ID == 'Zombie':
                         print(zombieAtt)
-                    elif BattleMob == 'Wolf':
+                    elif BattleMob.ID == 'Wolf':
                         print(wolfAtt)
-                    elif BattleMob =='Dragon':
+                    elif BattleMob.ID =='Dragon':
                         print(dragonAtt)
                     print("The enemy attacks with a",random.choice(BattleMob.Moves),
                                   "- You have 0 health. You died!!")
@@ -612,6 +609,16 @@ Ascii art wolf created by bug at https://www.asciiart.eu/animals/wolves
 
 Ascii art dragon created by Joan at asciiart.website//joan/www.geocities.com
 
+Ascii Dragon attack Art by Shanaka Dias
+
+AScii art Zombie by Nabis at https://www.asciiart.eu/mythology/skeletons
+
+Ascii zombie attack at http://www.asciiworld.com/-Death-Co-.html
+
+Gene Shuman ascii art created at https://www.text-image.com/convert/ascii.html
+
+AScii art snake attack by CJR at http://ascii.co.uk/art/snake
+
 Clear function created by mohit_negi @ Geeksforgeeks.com
 https://www.geeksforgeeks.org/clear-screen-python/
 '''
@@ -743,26 +750,28 @@ zombieImg = '''
                                              |||||
 '''
 zombieAtt = '''/
-   ..............
-   ::::::::::::::::::
-  :::::::::::::::
- :::`::::::: :::     :
- :::: ::::: :::::    :
- :`   :::::;     :..~~
- :   ::  :::.     :::.
- :...`:, :::::...:::
-::::::.  :::::::::'
- ::::::::|::::::::  !
- :;;;;;;;;;;;;;;;;']}
- ;--.--.--.--.--.-
-  \/ \/ \/ \/ \/ \/
-     :::       ::::
-      :::      ::
-     :\:      ::
-   /\::    /\:::
- ^.:^:.^^^::`::
- ::::::::.::::
-  .::::::::::
+          _,.-----.,_
+       ,-~           ~-.
+      ,^___           ___^.
+    /~"   ~"   .   "~   "~\\
+   Y  ,--._    I    _.--.  Y
+    | Y     ~-. | ,-~     Y |
+    | |        }:{        | |
+    j l       / | \\       ! l
+ .-~  (__,.--" .^. "--.,__)  ~-.
+(           / / | \\ \\           )
+ \\.____,   ~  \\/"\\/  ~   .____,/
+  ^.____                 ____.^
+     | |T ~\\  !   !  /~ T| |
+     | |l   _ _ _ _ _   !| |
+     | l \\/V V V V V V\\/ j |
+     l  \\ \\|_|_|_|_|_|/ /  !
+      \  \\[T T T T T TI/  /
+       \  `^-^-^-^-^-^'  /
+        \               /
+         \.           ,/
+           "^-.___,-^"
+
 '''
 wolfImg = '''
                               __
@@ -797,10 +806,10 @@ wolfAtt = '''\
              _     ___
             #_~`--'__ `===-,
             `.`.     `#.,//
-            ,_\_\     ## #\
-            `__.__    `####\          unknown
-                 ~~\ ,###'~
-                    \##'
+            ,_\\_\\     ## #\\
+            `__.__    `####\\
+                 ~~\\ ,###'~
+                    \\##'
 '''
 knightImg = '''
                           ,dM
@@ -831,13 +840,13 @@ knightImg = '''
 '''
 knightAtt = '''\
            _____   _____
-          /     \ /     \
+          /     \\ /     \\
      ,   |       '       |
      I __L________       L__
 O====IE__________/     ./___>
-     I      \.       ./
-     `        \.   ./
-                \ /
+     I      \\.       ./
+     `        \\.   ./
+                \\ /
                  '
 
 '''
@@ -905,11 +914,11 @@ mageSp = '''\
                              ____
                      __,-~~/~    `---.
                    _/_,---(      ,    )
-               __ /        <    /   )  \___
+               __ /        <    /   )  \\___
 - ------===;;;'====------------------===;;;===----- -  -
-                  \/  ~"~"~"~"~"~\~"~)~"/
-                  (_ (   \  (     >    \)
-                   \_( _ <         >_>'
+                  \\/  ~"~"~"~"~"~\\~"~)~"/
+                  (_ (   \\  (     >    \\)
+                   \\_( _ <         >_>'
                       ~ `-i' ::>|--"
                           I;|.|.|
                          <|i::|i|`.
@@ -1062,23 +1071,89 @@ dragon = '''\
                                   ((((          __.-~ _.-~
                                               <.~~~.~'
 '''
+profImg = '''
+````````````````````````````````````````````````````````````````````````````````````````````````````
+``````````````````````````````````````````hyyoo////::://///++ossy```````````````````````````````````
+``````````````````````````````````````hyso++++//:::::::::::::/++++oshhh`````````````````````````````
+```````````````````````````````````hys+////::-......--::///////+++oooyhhh```````````````````````````
+`````````````````````````````````dyo+/::::-..`.````..----::://++++oossyhhhh`````````````````````````
+```````````````````````````````hhs++////:........```..-------::::/+oossyyhhhh```````````````````````
+```````````````````````````````hso////:-................---------:://+oooooyhhh`````````````````````
+``````````````````````````````hyy+++//::----------........-------:::::///+++yhh`````````````````````
+``````````````````````````````hhy+++++/::::------.........------------/:::://yhh````````````````````
+``````````````````````````````hyooso+++//::------.........---------:--::---:/shhh```````````````````
+``````````````````````````````yssyysoo++/:::------.........--------:---:----:shhh```````````````````
+``````````````````````````````y+oyyyooo+/:::::---...`......--------------.---ohhh```````````````````
+``````````````````````````````s/syyyso++/::::-:--..........------:::::---.--:ohhh```````````````````
+``````````````````````````````s+syyyoo++/::------.........-------::::::--.--/shhh```````````````````
+``````````````````````````````sosyyysoo+/::-------.--......-------:::::--..-/yhhh```````````````````
+``````````````````````````````yssyyyoo++//:---------........-------::::--.--+yhhh```````````````````
+``````````````````````````````hssyhyo+ooo++/:--------.--::///:/:--:::/:-.:::shhhh```````````````````
+``````````````````````````````hhyhdhhhhhhhhyo++:::::/+oosyyso++++++++oooso/:+yhhh```````````````````
+``````````````````````````````hdNmdhhhyhhmmmmdddssyhsssyyymhdyysodNNNNdh+--:s+hhhh``````````````````
+``````````````````````````````myhhyyyhhssyysyhdd:--h+::///oso+oooyssso+/-:--//hhhh``````````````````
+``````````````````````````````hyhdsoo+++////osds:-./y..-::----://o///////s--:+hhhh``````````````````
+``````````````````````````````hhmdyo/:::////oyso:---//-.....--:/+::///+:-+/-:hhhh```````````````````
+``````````````````````````````hhmmyso+////++oss+:--::-//:-----:---:///+:--:-shhh````````````````````
+```````````````````````````````hhhyys+/:-::+sss/:--:--::-.....----:/:++:-.-+hhhh````````````````````
+````````````````````````````````hyyhyo/::/+syhy+/::/oo/::/:...---////+/-.:shhhh`````````````````````
+````````````````````````````````hhhhhso+ooooyhmdhyo+:::..-:///:-:/::/o+/ohhhh```````````````````````
+`````````````````````````````````hhhhyss/:://+osso+-----....-/o+/:://osyhhh`````````````````````````
+``````````````````````````````````hhyyyhsosoooososs+++:/::/:--://:://o/ohhh`````````````````````````
+```````````````````````````````````hyyyhyhhddhhyyyssoossso+//-//////+o/ohhh`````````````````````````
+````````````````````````````````````hyyhhsssso/::::----::--:-//++///o///dhhl````````````````````````
+`````````````````````````````````````hyyhyssosso/++//::-----////://o+//:hNNq````````````````````````
+``````````````````````````````````````hyyyyo+////:--------.-/:::+os+:+-//NNq````````````````````````
+``````````````````````````````````````dmhyyo+++/:::::------://+sys/:/:/::/hhh```````````````````````
+````````````````````````````````````hhmMNdhhsooo++++////:/+oyhho/://:/:::shhhhq`````````````````````
+``````````````````````````````````mmmdNMMNmdhhhhhhhhhhhyhhddhs+///://::/ohhhhhhdq```````````````````
+``````````````````````````````NNMMMNhdNNMMNmdhhhdmNmmmddhyyso++/://:///+hhhhhhhddddq````````````````
+`````````````````````````NNMMMMMMMMhyhdmMMMNmdhhddhhhhyssooo+:/++//////hhhhhhhhhhdhdhddd````````````
+`````````````````NNMMMMMMMMMMMMMMMmssyhhMMMNNmdhyyysssssso+:/oo+/::///yhhhhhhhhhhdhhhhhddddm````````
+`````````````NNMNNNNNNNNNNNMMMMMMMsoossyMMMMNNNmdhssyyso//+ooo/:/://:ohhhhhhhhhhhdhhhhhhhddddd``````
+``````````NNNNNNNNNNNNNNNNNNNMNNMmymNNmsmMMMNNNNNdhy+::/oooo+/::/:/:shhhhhhhhhhhhhhhhhhhhhhhddddd```
+````````NNNNNNNNNNNNNNNNNNNNNNNNMmoyNMNshhmMNNmhyydNm//o+++//:::/:/+dhhhhhhhhhhhhhhhhhhhhhhhhhdddd``
+``````NNNNNNNmmNmNmNNNNNNNNNNNNNNNy+dMNdhhsmNhyysydNNyo+++///:::/+/hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhdd`
+````NNNNNNNNmmmmmmmNmNNNNNNNNNNNNMNsommNNdhhhooooshmNs++o//:::/+//sdhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+```NNNmNNNNmmmmmmmmmmNmmmNNNNNNNNMMmosdydNmdo+//++sdm+++/::::///:odhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+``NNNmmNNNNNNmmmmmmmmmmmmmNNNNNMMMMdhsyyshmyooooosydm++/::://::/:hdhhhhhhhhhhhdhhhdhhhhhhhhhhhhhhhhh
+`NNNNmNNNNNNNmmmmmmmmmmmmmmmNNNNMMNyhhsoyyyooooo+++yd/-:::/:/::/oddhhhhhhhhhhhdhhhdhdhhhhhhhhhhhhhhh
+'''
 dragonAtt = '''\
-Art by Shanaka Dias
- <>=======() 
-(/\___   /|\\          ()==========<>_
-      \_/ | \\        //|\   ______/ \)
-        \_|  \\      // | \_/
-          \|\/|\_   //  /\/
-           (oo)\ \_//  /
-          //_/\_\/ /  |
-         @@/  |=\  \  |
-              \_=\_ \ |
-                \==\ \|\_ snd
-             __(\===\(  )\
-            (((~) __(_/   |
-                 (((~) \  /
-                 ______/ /
-                 '------'
+                                       \\/
+                                       ^`'.
+                                       ^   `'.
+             (                         ^      `'.
+           )  )        \\/              ^         `'.
+         (   ) @       /^              ^            `'.
+       )  )) @@  )    /  ^             ^               `'.
+      ( ( ) )@@      /    ^            ^                  `'.
+    ))  ( @@ @ )    /      ^           ^                     `'.
+   ( ( @@@@@(@     /       |\\_/|,      ^                        `'.
+  )  )@@@(@@@     /      _/~/~/~|C     ^                           `'.
+((@@@(@@@@@(     /     _(@)~(@)~/\\C    ^                              `'.
+  ))@@@(@@)@@   /     /~/~/~/~/`\\~`C   ^             __.__               `'.
+   )@@@@(@@)@@@(     (o~/~o)^,) \\~ \\C  ^          .' -_'-'"...             `.
+    ( (@@@)@@@(@@@@@@_~^~^~,-/\\~ \\~ \\C/^        /`-~^,-~-`_~-^`;_           `.
+      @ )@@@(@@@@@@@   \\^^^/  (`^\\.~^ C^.,  /~^~^~^/_^-_`~-`~-~^\\- /`'-./`'-. ;
+       (@ (@@@@(@@      `''  (( ~  .` .,~^~^-`-^~`/'^`-~ _`~-`_^-~\\/         ^^
+           @jgs@             (((` ~ .-~-\\ ~`-_~`-/_-`~ `- ~-_- `~`;
+          /                 /~((((` . ~-~\\` `  ~ |:`-_-~_~`  ~ _`-`;
+         /                 /~-((((((`.\\-~-\\ ~`-`~^\/- ^_-~ ~` -_~-_`~`;
+        /             /-~-/(((((((`\~-~\\~`^-`~`\\ -~`~/\\-^ -_~-_`~-`;
+       /                 /~-~/  `((((((|-~-|((`.-~.`Y`_,~`/\\ `,- ~-_`~-`;
+      /              ___/-~-/     `""""|~-~|"''    /~-^ .'    `:~`-_`~-~`;
+     /         _____/  /~-~/           |-~-|      /-~-~.`      `:~^`-_`^-:
+    /    _____/        ((((            ((((      (((((`           `:~^-_~-`;
+    \\___/                                                          `:_^-~`;
+                                                                    `:~-^`:
+                                                                  ,`~-~`,`
+                                                                 ,"`~.,'
+                                                               ,"-`,"`
+                                                             ,"_`,"
+                                                            ,","`
+                                                         ;~-~_~~;
+                                                          '. ~.'
 '''
 
 Shuman = '''\██████████████████████──
@@ -1113,20 +1188,33 @@ Shuman = '''\██████████████████████�
 
 '''
 ShumanPM = '''\
-             ____
-            / . .\
-MT          \  ---<
-             \  /
-   __________/ /
--=:___________/
+            ____
+      _,.-'`_ o `;__,
+       _.-'` '---'  '
+                    ____
+                 .'`_ o `;__,
+       .       .'.'` '---'  '
+       .`-...-'.'
+        `-...-'
+                        _,.--.
+    --..,_           .'`__ o  `;__,
+       `'.'.       .'.'`  '---'`  ' 
+          '.`-...-'.'
+            `-...-'
+
+    --..,_                     _,.--.
+       `'.'.                .'`__ o  `;__.
+          '.'.            .'.'`  '---'`  `
+            '.`'--....--'`.'
+              `'--....--'`
 '''
 ShumanLE = '''\
  _                         
 | |                        
 | | __ _ ___  ___ _ __ ___ 
-| |/ _` / __|/ _ \ '__/ __|
-| | (_| \__ \  __/ |  \__ \
-|_|\__,_|___/\___|_|  |___/
+| |/ _` / __|/ _ \\ '__/ __|
+| | (_| \\__ \\  __/ |  \\__ \\
+|_|\\__,_|___/\\___|_|  |___/
 '''
 ShumanFB = '''\
                (  .      )
@@ -1141,13 +1229,13 @@ ShumanFB = '''\
 ShumanOip = '''\
 
                         _    ,-,    _
-                 ,--, /: :\/': :`\/: :\
+                 ,--, /: :\\/': :`\\/: :\\
                 |`;  ' `,'   `.;    `: |
                 |    |     |  '  |     |.
                 | :  |     | pb  |     ||
-                | :. |  :  |  :  |  :  | \
-                 \__/: :.. : :.. | :.. |  )
-                      `---',\___/,\___/ /'
+                | :. |  :  |  :  |  :  | \\
+                 \\__/: :.. : :.. | :.. |  )
+                      `---',\\___/,\\___/ /'
                            `==._ .. . /'
                                 `-::-'
 '''
