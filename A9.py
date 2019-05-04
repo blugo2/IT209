@@ -45,7 +45,7 @@ class Char():
                 #self.Att += Move
             if Type == "Hp":
                 Move_Type = "Hp"
-                print(self.name,' uses ',Name,'! Gaining',Move,"Now ",self.name,'has',self.Mag,' Mag left.')
+                print(self.name,' uses ',Name,'! Gaining',Move,"health. Now ",self.name,'has',self.Mag,' Mag left.')
                 return Move_Type
                 #self.Hp += Move
         else:
@@ -263,15 +263,15 @@ class controller():
     def TriggerMob():
         itemPickup = random.randint(1,10)
         if itemPickup in range(1,4):
-            zombieMob = Zombie(7,2,"Zombie")
+            zombieMob = Zombie(8,2,"Zombie")
             BattleMob = zombieMob
             controller.TriggerBattle(BattleMob,zombieAtt,wolfAtt,dragonAtt)
-        elif itemPickup in range(5,6):
+        elif itemPickup in range(11,6):
             wolfMob = Wolf(10,2,"Wolf")
             BattleMob = wolfMob
             controller.TriggerBattle(BattleMob,zombieAtt,wolfAtt,dragonAtt)
         elif itemPickup in range(7,9):
-            dragonMob = Dragon(12,3,"Dragon")
+            dragonMob = Dragon(14,3,"Dragon")
             BattleMob = dragonMob
             controller.TriggerBattle(BattleMob,zombieAtt,wolfAtt,dragonAtt)
         else:
@@ -290,7 +290,7 @@ class controller():
                         print(zombieAtt)
                     elif BattleMob.ID == 'Wolf':
                         print(wolfAtt)
-                    elif BattleMob.iD =='Dragon':
+                    elif BattleMob.ID =='Dragon':
                         print(dragonAtt)
                     print("The enemy attacks with",random.choice(BattleMob.Moves),
                                   "- You have", Player.Hp,"health remaining.")
@@ -303,11 +303,12 @@ class controller():
                         print(dragonAtt)
                     print("The enemy attacks with a",random.choice(BattleMob.Moves),
                                   "- You have 0 health. You died!!")
+                    input("...")
                     break
             else:
                 print("The ",BattleMob.ID," attack missed you!")
             if Player.Hp < 1:
-                #self.turnCount = 6
+                self.turnCount = 6
                 break
             else:
                 pass
@@ -346,7 +347,7 @@ class controller():
                 
         if Player.Hp >0:
             print("You defeated a",BattleMob.ID)
-        elif Player.Hp == 0:
+        elif Player.Hp <= 0:
             control.turnCount = 6
             exit
         elif BattleMob == Professor_Shuman:
@@ -356,8 +357,9 @@ class controller():
 ##################################
     def TriggerBoss(BattleMob):
         BattleMob = BattleMob
-        print(BattleMob)
         print(BattleMob.openmsg())
+        input("Hit enter to move continue...")
+        print(BattleMob)
         while BattleMob.Hp > 0 and Player.Hp > 0:
             BattleMob_Turn = random.randint(1,2)
             if BattleMob_Turn == 1:
@@ -386,11 +388,12 @@ class controller():
                         print(ShumanOip)
                     print("The enemy attacks with a",attack,
                                   "- You have 0 health. You died!!")
+                    input("...")
                     break
             else:
                 print("The ",BattleMob.ID," attack missed you!")
             if Player.Hp < 1:
-                #self.turnCount = 6
+                self.turnCount = 6
                 break
             else:
                 pass
@@ -411,6 +414,7 @@ class controller():
                 
                 if BattleMob.Hp <= 0:
                     print("The enemy has lost all its health!!")
+                    print("\nCongrats! You defeated Professor Shuman, guardian of the world.")
                 else:
                     print("\nThe enemy now has",BattleMob.Hp,"health remaining.")
             elif action == "2":
@@ -418,8 +422,14 @@ class controller():
                 Move_Type.append(Player.Ability())
                 if Move_Type[0] == "Att":
                     BattleMob.Hp -= Player.Att + Player.Sp
+                    if Player.c_type == 'm':
+                        print(mageSp)
+                    elif Player.c_type =='a':
+                        print(archerSp)
                 else:
                     Player.Hp += Player.Sp + 2
+                    if Player.c_type == 'k':
+                        print(knightSp)
         if Player.Hp >0:
             print("You defeated",BattleMob.ID)
             control.turnCount = 7
@@ -433,6 +443,7 @@ class controller():
         
     def PlayerClass(self):
         if self.turnCount == 0:
+            time.sleep(5)
             print(title)
             time.sleep(1)
             clear()
@@ -453,15 +464,15 @@ class controller():
             Enter 1 of the above class choices: ''')
             Char.name = input("What is your name?: ")
             if classType.lower() == "knight":
-                PlayerK = Knight(name,20,3,4,5,'k',1)
+                PlayerK = Knight(name,11,2,4,5,'k',1)
                 self.Player = PlayerK
                 return self.Player
             elif classType.lower() == "archer":
-                PlayerA = Archer(name,2,3,4,5,'a',1)
+                PlayerA = Archer(name,13,3,4,5,'a',1)
                 self.Player = PlayerA
                 return self.Player
             elif classType.lower() == "mage":
-                PlayerM = Mage(name,2,3,4,5,'m',1)
+                PlayerM = Mage(name,8,4,4,5,'m',1)
                 self.Player = PlayerM
                 return self.Player
             
@@ -527,7 +538,7 @@ class controller():
         CloudMsg = [("As you continue along your journey,  you stop to gaze up upon the clouds.\nA curious thing catches your eye. In the distance you can see what you can only describe as a faint,\ndark object on the horizon. You blink, and it's gone! Hopefully it was nothing..."),
                     ("Having progessed further along towards your destination you stop to take a rest.\nBefore your eyes fully close you note that the object on the horizion you saw eariler has reappeared,\nbigger in size yet still quit some distance away. You note that it may be a strom, but quickly dirft to sleep."),
                     ("Now that you have made considerable progress through the area you are suddenly\naware of a dark presence near you. You look up and realize that the dark object from before was\nindeed a storm, a big one too it appears. Hopefully, you will reach your destination before it hits you..."),
-                    ("The storm is making quick  time, and you feel the air around get colder.\nThe air tastes moist, and the sky is a deep, dark grey. You quickly push on towards the center of the area!"),
+                    ("The storm is making quick  time, and you feel the air around you get colder.\nThe air tastes moist, and the sky is a deep, dark grey. You quickly push on towards the center of the area!"),
                     ("The storm is upon you! The edge of the storm is quickly gaining ground on you,\ntry as you might you are not able to out run it. The sky turns dark around you, and thick, heavy droplets\n rain down against your skin. Lighting crackles and momentairy lights your path.\nYou breifly see a figure standing before you. They seem to be the epicentor of the storm..."),
                     ("Death greets you...\n"),
                     ("The clouds begin to clear up!\n")]
@@ -569,23 +580,32 @@ class controller():
                     controller.endGame()
                     
                 elif self.turnCount == 6:
-                    print("game over")
+                    clear()
+                    print(gameOver)
+                    print(graveStone)
                     controller.endCredits()
+                    input("Hit enter to leave the game....")
                     break
                     
                 elif self.turnCount == 7:
-                   print("put end game credits here")
-                   controller.endCredits()
-                   break
+                    clear()
+                    time.sleep(3)
+                    print(win)
+                    controller.endCredits()
+                    input("\nHit enter to leave the game....")
+                    break
 
     def endGame():
-        Professor_Shuman = Boss(20,3,"Professor Shuman")
+        Professor_Shuman = Boss(20,4,"Professor Shuman")
         BattleMob = Professor_Shuman
         controller.TriggerBoss(BattleMob)
         input = ("Thanks for playing our game!")
 
     def endCredits():
-        print(creditPage)
+        for i in creditPage:
+            print(i)
+            time.sleep(2)
+        #print(creditPage)
         input = ("Hit enter to finish")
 
 #-------------Openning Credits-------------------------------
@@ -595,35 +615,81 @@ import random
 
 
 
-creditPage = '''
-   Written by Billy Duggleby and Brendon Lugo
-for IT209 at George Mason University, Spring 2019.
-
-Ascii art wizard created by Morfina at www.asciiart.eu
-
-Ascii art knight created by fsc at http://ascii.co.uk
-
-Ascii art archer created by Erorppn Xrzavgm at http://ascii.co.uk
-
-Ascii art wolf created by bug at https://www.asciiart.eu/animals/wolves
-
-Ascii art dragon created by Joan at asciiart.website//joan/www.geocities.com
-
-Ascii Dragon attack Art by Shanaka Dias
-
-AScii art Zombie by Nabis at https://www.asciiart.eu/mythology/skeletons
-
-Ascii zombie attack at http://www.asciiworld.com/-Death-Co-.html
-
-Gene Shuman ascii art created at https://www.text-image.com/convert/ascii.html
-
-AScii art snake attack by CJR at http://ascii.co.uk/art/snake
-
-Clear function created by mohit_negi @ Geeksforgeeks.com
-https://www.geeksforgeeks.org/clear-screen-python/
+creditPage = [
+   ["Written by Billy Duggleby and Brendon Lugo for IT209 at George Mason University, Spring 2019."],
+["Ascii art wizard created by Morfina at www.asciiart.eu"],
+["Ascii art knight created by fsc at http://ascii.co.uk"],
+["Ascii art archer created by Erorppn Xrzavgm at http://ascii.co.uk"],
+["Ascii art wolf created by bug at https://www.asciiart.eu/animals/wolves"],
+["Ascii art dragon created by Joan at asciiart.website//joan/www.geocities.com"],
+["Ascii Dragon attack Art by Shanaka Dias"],
+["AScii art Zombie by Nabis at https://www.asciiart.eu/mythology/skeletons"],
+["Ascii zombie attack at http://www.asciiworld.com/-Death-Co-.html"],
+["Gene Shuman ascii art created at https://www.text-image.com/convert/ascii.html"],
+["AScii art snake attack by CJR at http://ascii.co.uk/art/snake"],
+["AScii art tombstone by jgs at http://ascii.co.uk/art/rip"],
+["Clear function created by mohit_negi @ Geeksforgeeks.com"],
+["https://www.geeksforgeeks.org/clear-screen-python/"],
+["AScii GAME OVER by unknown at http://textart4u.blogspot.com/2013/05/game-over-text-art.html"],
+["AScii CONGRATS by hjw from http://ascii.co.uk/art/congrats "]]
+gameOver = '''\
+┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼
+███▀▀▀██┼███▀▀▀███┼███▀█▄█▀███┼██▀▀▀
+██┼┼┼┼██┼██┼┼┼┼┼██┼██┼┼┼█┼┼┼██┼██┼┼┼
+██┼┼┼▄▄▄┼██▄▄▄▄▄██┼██┼┼┼▀┼┼┼██┼██▀▀▀
+██┼┼┼┼██┼██┼┼┼┼┼██┼██┼┼┼┼┼┼┼██┼██┼┼┼
+███▄▄▄██┼██┼┼┼┼┼██┼██┼┼┼┼┼┼┼██┼██▄▄▄
+┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼
+███▀▀▀███┼▀███┼┼██▀┼██▀▀▀┼██▀▀▀▀██▄┼
+██┼┼┼┼┼██┼┼┼██┼┼██┼┼██┼┼┼┼██┼┼┼┼┼██┼
+██┼┼┼┼┼██┼┼┼██┼┼██┼┼██▀▀▀┼██▄▄▄▄▄▀▀┼
+██┼┼┼┼┼██┼┼┼██┼┼█▀┼┼██┼┼┼┼██┼┼┼┼┼██┼
+███▄▄▄███┼┼┼─▀█▀┼┼─┼██▄▄▄┼██┼┼┼┼┼██▄
 '''
-
-
+graveStone ='''\
+          
+                               -|-
+                                |
+                            .-'~~~`-.
+                          .'         `.
+                          |  R  I  P  |
+  jgs                     |           |
+                          |           |
+                        \\|           |//
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+'''
+win = '''\
+                                ,.        ,.      ,.
+                                ||        ||      ||  ()
+ ,--. ,-. ,.,-.  ,--.,.,-. ,-.  ||-.,.  ,.|| ,-.  ||-.,. ,-. ,.,-.  ,--.
+//`-'//-\\||/|| //-||||/`'//-\\ ||-'||  ||||//-\\ ||-'||//-\\||/|| ((`-'
+||   || |||| ||||  ||||   || || ||  || /|||||| || ||  |||| |||| ||  ``.
+\\,-.\\-//|| || \\-||||   \\-|| ||  ||//||||\\-|| ||  ||\\-//|| || ,-.))
+ `--' `-' `' `'  `-,|`'    `-^-``'  `-' `'`' `-^-``'  `' `-' `' `' `--'
+                  //           .--------.
+              ,-.//          .: : :  :___`.
+              `--'         .'!!:::::  \\_\ `.
+                      : . /%O!!::::::::\\_\. \
+                     [""]/%%O!!:::::::::  : . \
+                     |  |%%OO!!::::::::::: : . |
+                     |  |%%OO!!:::::::::::::  :|
+                     |  |%%OO!!!::::::::::::: :|
+            :       .'--`.%%OO!!!:::::::::::: :|
+          : .:     /`.__.'\%%OO!!!::::::::::::/
+         :    .   /        \%OO!!!!::::::::::/
+        ,-'``'-. ;          ;%%OO!!!!!!:::::'
+        |`-..-'| |   ,--.   |`%%%OO!!!!!!:'
+        | .   :| |_.','`.`._|  `%%%OO!%%'
+        | . :  | |--'    `--|    `%%%%'
+        |`-..-'| ||   | | | |     /__\`-.
+        \::::::/ ||)|/|)|)|\|           /
+---------`::::'--|._ ~**~ _.|----------( -----------------------
+           )(    |  `-..-'  |           \    ______
+           )(    |          |,--.       ____/ /  /\\ ,-._.-'
+        ,-')('-. |          |\`;/   .-()___  :  |`.!,-'`'/`-._
+       (  '  `  )`-._    _.-'|;,|    `-,    \_\__\`,-'>-.,-._
+        `-....-'     ````    `--'      `-._       (`- `-._`-.   hjw
+'''
 choose = '''
       * ***      *                                                                                                          
     *  ****  * **                                                                                                           
@@ -1156,37 +1222,6 @@ dragonAtt = '''\
                                                           '. ~.'
 '''
 
-Shuman = '''\██████████████████████──
-██████████████████████──
-█░░██████████████░░░██──
-█░░░░██████████░░░░███──
-█░░░░░░██████░░░░░████──
-█░░░░░░░███░░░░░░█████──
-█░░░░░░░░░░░░░░░░░████──
-██████░░░███████░░░███──
-█░░░░░░█░░░░░░░░░░░░██──
-█░░░░░░█░░░░░░░░░░░░░███
-█░▄▀▀███░░▄▀▀██▄░░░░░░░█
-█░█─████░░█─████░░░░░░░█
-█░█▄████░░█▄████░░░░░░░█
-█░░░░░░█░░░░░░░░░░░░░███
-█░░░░░░█░░░░░░░░░░░░░█──
-█░░░░░░█░░░░░░░░░░░░░█──
-█░░░░░░███░░░█░░░░░░░█──
-█░░░░░░░░█░░█░░░░░░░░█──
-█░░░░░░░░█░█░░░░░░░░░█──
-█░░░░░░░░██░░░░░░░░░░█──
-█░░░░░░░░░░░░░░░░░░░░█──
-█░░░░░░░░░░░░░░░░░░░░█──
-█░░░░░░░░░░░░░░░░░░░░█──
-██████████░░░░░░░░████──
-───────█─██░░░░░░██──█──
-───────█──███░░███───█──
-───────█────████─────█──
-───────█─────██──────█──
-
-
-'''
 ShumanPM = '''\
             ____
       _,.-'`_ o `;__,
