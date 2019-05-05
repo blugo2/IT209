@@ -252,10 +252,10 @@ class controller():
             current_item.append(list(PlayerItems)[pick - 1])
           
             if pick%2 == 0:
-                print("You found a", current_item," that you are now weilding and your attack is now", pick)
+                print("You found a", current_item," that you are now wielding and your attack is now", pick)
                 Player.Att += pick
             else:
-                print("You found a", current_item," that you consume quicly and gain the following hp:",pick)
+                print("You found a", current_item," that you consume quickly and gain the following hp:",pick)
                 Player.Hp += pick
         else:
             controller.TriggerMob()
@@ -350,9 +350,9 @@ class controller():
         elif Player.Hp <= 0:
             control.turnCount = 6
             exit
-        elif BattleMob == Professor_Shuman:
-            control.turnCount = 7
-            exit
+        #elif BattleMob == Professor_Shuman:
+         #   control.turnCount = 7
+          #  exit
 
 ##################################
     def TriggerBoss(BattleMob):
@@ -386,12 +386,12 @@ class controller():
                         print(ShumanFB)
                     elif attack == "One Inch Punch":
                         print(ShumanOip)
-                    print("The enemy attacks with a",attack,
+                    print("The enemy attacks with",attack,
                                   "- You have 0 health. You died!!")
                     input("...")
                     break
             else:
-                print("The ",BattleMob.ID," attack missed you!")
+                print(BattleMob.ID," missed you!")
             if Player.Hp < 1:
                 self.turnCount = 6
                 break
@@ -410,7 +410,7 @@ class controller():
                     print(knightAtt)
                 elif Player.c_type == 'a':
                     print(archerAtt)
-                print("You attack the",BattleMob.ID,"!")
+                print("You attack",BattleMob.ID,"!")
                 
                 if BattleMob.Hp <= 0:
                     print("The enemy has lost all its health!!")
@@ -596,17 +596,15 @@ class controller():
                     break
 
     def endGame():
-        Professor_Shuman = Boss(20,4,"Professor Shuman")
+        Professor_Shuman = Boss(20,3,"Professor Shuman")
         BattleMob = Professor_Shuman
         controller.TriggerBoss(BattleMob)
         input = ("Thanks for playing our game!")
 
     def endCredits():
         for i in creditPage:
-            print(i)
+            print(i,"\n")
             time.sleep(2)
-        #print(creditPage)
-        input = ("Hit enter to finish")
 
 #-------------Openning Credits-------------------------------
 import time
@@ -615,23 +613,22 @@ import random
 
 
 
-creditPage = [
-   ["Written by Billy Duggleby and Brendon Lugo for IT209 at George Mason University, Spring 2019."],
-["Ascii art wizard created by Morfina at www.asciiart.eu"],
-["Ascii art knight created by fsc at http://ascii.co.uk"],
-["Ascii art archer created by Erorppn Xrzavgm at http://ascii.co.uk"],
-["Ascii art wolf created by bug at https://www.asciiart.eu/animals/wolves"],
-["Ascii art dragon created by Joan at asciiart.website//joan/www.geocities.com"],
-["Ascii Dragon attack Art by Shanaka Dias"],
-["AScii art Zombie by Nabis at https://www.asciiart.eu/mythology/skeletons"],
-["Ascii zombie attack at http://www.asciiworld.com/-Death-Co-.html"],
-["Gene Shuman ascii art created at https://www.text-image.com/convert/ascii.html"],
-["AScii art snake attack by CJR at http://ascii.co.uk/art/snake"],
-["AScii art tombstone by jgs at http://ascii.co.uk/art/rip"],
-["Clear function created by mohit_negi @ Geeksforgeeks.com"],
-["https://www.geeksforgeeks.org/clear-screen-python/"],
-["AScii GAME OVER by unknown at http://textart4u.blogspot.com/2013/05/game-over-text-art.html"],
-["AScii CONGRATS by hjw from http://ascii.co.uk/art/congrats "]]
+creditPage = ["Written by Billy Duggleby and Brendon Lugo for IT209 at George Mason University, Spring 2019.",
+              "Ascii art wizard created by Morfina at www.asciiart.eu",
+              "Ascii art knight created by fsc at http://ascii.co.uk",
+"Ascii art archer created by Erorppn Xrzavgm at http://ascii.co.uk",
+"Ascii art wolf created by bug at https://www.asciiart.eu/animals/wolves",
+"Ascii art dragon created by Joan at asciiart.website//joan/www.geocities.com",
+"Ascii Dragon attack Art by Shanaka Dias",
+"AScii art Zombie by Nabis at https://www.asciiart.eu/mythology/skeletons",
+"Ascii zombie attack at http://www.asciiworld.com/-Death-Co-.html",
+"Gene Shuman ascii art created at https://www.text-image.com/convert/ascii.html",
+"AScii art snake attack by CJR at http://ascii.co.uk/art/snake",
+"AScii art tombstone by jgs at http://ascii.co.uk/art/rip",
+"Clear function created by mohit_negi @ Geeksforgeeks.com",
+"https://www.geeksforgeeks.org/clear-screen-python/",
+"AScii GAME OVER by unknown at http://textart4u.blogspot.com/2013/05/game-over-text-art.html",
+"AScii CONGRATS by hjw from http://ascii.co.uk/art/congrats "]
 gameOver = '''\
 ┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼
 ███▀▀▀██┼███▀▀▀███┼███▀█▄█▀███┼██▀▀▀
@@ -646,49 +643,50 @@ gameOver = '''\
 ██┼┼┼┼┼██┼┼┼██┼┼█▀┼┼██┼┼┼┼██┼┼┼┼┼██┼
 ███▄▄▄███┼┼┼─▀█▀┼┼─┼██▄▄▄┼██┼┼┼┼┼██▄
 '''
-graveStone ='''\
+graveStone ='''
           
                                -|-
                                 |
                             .-'~~~`-.
                           .'         `.
                           |  R  I  P  |
-  jgs                     |           |
                           |           |
-                        \\|           |//
+                          |           |
+                        \\\\|           |//
    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 '''
-win = '''\
-                                ,.        ,.      ,.
-                                ||        ||      ||  ()
- ,--. ,-. ,.,-.  ,--.,.,-. ,-.  ||-.,.  ,.|| ,-.  ||-.,. ,-. ,.,-.  ,--.
-//`-'//-\\||/|| //-||||/`'//-\\ ||-'||  ||||//-\\ ||-'||//-\\||/|| ((`-'
-||   || |||| ||||  ||||   || || ||  || /|||||| || ||  |||| |||| ||  ``.
-\\,-.\\-//|| || \\-||||   \\-|| ||  ||//||||\\-|| ||  ||\\-//|| || ,-.))
- `--' `-' `' `'  `-,|`'    `-^-``'  `-' `'`' `-^-``'  `' `-' `' `' `--'
-                  //           .--------.
-              ,-.//          .: : :  :___`.
-              `--'         .'!!:::::  \\_\ `.
-                      : . /%O!!::::::::\\_\. \
-                     [""]/%%O!!:::::::::  : . \
-                     |  |%%OO!!::::::::::: : . |
-                     |  |%%OO!!:::::::::::::  :|
-                     |  |%%OO!!!::::::::::::: :|
-            :       .'--`.%%OO!!!:::::::::::: :|
-          : .:     /`.__.'\%%OO!!!::::::::::::/
-         :    .   /        \%OO!!!!::::::::::/
-        ,-'``'-. ;          ;%%OO!!!!!!:::::'
-        |`-..-'| |   ,--.   |`%%%OO!!!!!!:'
-        | .   :| |_.','`.`._|  `%%%OO!%%'
-        | . :  | |--'    `--|    `%%%%'
-        |`-..-'| ||   | | | |     /__\`-.
-        \::::::/ ||)|/|)|)|\|           /
----------`::::'--|._ ~**~ _.|----------( -----------------------
-           )(    |  `-..-'  |           \    ______
-           )(    |          |,--.       ____/ /  /\\ ,-._.-'
-        ,-')('-. |          |\`;/   .-()___  :  |`.!,-'`'/`-._
-       (  '  `  )`-._    _.-'|;,|    `-,    \_\__\`,-'>-.,-._
-        `-....-'     ````    `--'      `-._       (`- `-._`-.   hjw
+win = '''
+   _____                            _         _       _   _                 _ 
+  / ____|                          | |       | |     | | (_)               | |
+ | |     ___  _ __   __ _ _ __ __ _| |_ _   _| | __ _| |_ _  ___  _ __  ___| |
+ | |    / _ \\| '_ \\ / _` | '__/ _` | __| | | | |/ _` | __| |/ _ \\| '_ \\/ __| |
+ | |___| (_) | | | | (_| | | | (_| | |_| |_| | | (_| | |_| | (_) | | | \\__ \\_|
+  \\_____\\___/|_| |_|\\__, |_|  \\__,_|\\__|\\__,_|_|\\__,_|\\__|_|\\___/|_| |_|___(_)
+                     __/ |                                                    
+                    |___/   
+                                        .--------.
+                                      .: : :  :___`.
+                                    .'!!:::::  \\\\_\\ `.
+                               : . /%O!!::::::::\\\\_\\. \\
+                              [""]/%%O!!:::::::::  : . \\
+                              |  |%%OO!!::::::::::: : . |
+                              |  |%%OO!!:::::::::::::  :|
+                              |  |%%OO!!!::::::::::::: :|
+                     :       .'--`.%%OO!!!:::::::::::: :|
+                   : .:     /`.__.'\\%%OO!!!::::::::::::/
+                  :    .   /        \\%OO!!!!::::::::::/
+                 ,-'``'-. ;          ;%%OO!!!!!!:::::'
+                 |`-..-'| |   ,--.   |`%%%OO!!!!!!:'
+                 | .   :| |_.','`.`._|  `%%%OO!%%'
+                 | . :  | |--'    `--|    `%%%%'
+                 |`-..-'| ||   | | | |     /__\\`-.
+                 \\::::::/ ||)|/|)|)|\\|           /
+        ----------`::::'--|._ ~**~ _.|----------( -----------------------
+                    )(    |  `-..-'  |           \\    ______
+                    )(    |          |,--.       ____/ /  /\\ ,-._.-'
+                 ,-')('-. |          |\\`;/   .-()___  :  |`.!,-'`'/`-._
+                (  '  `  )`-._    _.-'|;,|    `-,    \\_\\__\\`,-'>-.,-._
+                 `-....-'     ````    `--'      `-._       (`- `-._`-.   hjw
 '''
 choose = '''
       * ***      *                                                                                                          
@@ -815,7 +813,7 @@ zombieImg = '''
                                              |lllj
                                              |||||
 '''
-zombieAtt = '''/
+zombieAtt = '''
           _,.-----.,_
        ,-~           ~-.
       ,^___           ___^.
@@ -868,7 +866,7 @@ wolfImg = '''
                            ;
 
 '''
-wolfAtt = '''\
+wolfAtt = '''
              _     ___
             #_~`--'__ `===-,
             `.`.     `#.,//
@@ -904,7 +902,7 @@ knightImg = '''
                    (     / 
                     `---'
 '''
-knightAtt = '''\
+knightAtt = '''
            _____   _____
           /     \\ /     \\
      ,   |       '       |
@@ -916,7 +914,7 @@ O====IE__________/     ./___>
                  '
 
 '''
-knightSp = '''\
+knightSp = '''
        @@@@@@           @@@@@@
       @@@@@@@@@@       @@@@@@@@@@
     @@@@@@@@@@@@@@   @@@@@@@@@@@@@@
@@ -963,7 +961,7 @@ wizardImg ='''
  _.-'       |      BBb       '-.  '-. 
 (___________\____.dBBBb.________)____)
 '''
-mageAtt = '''\
+mageAtt = '''
      _.-^^---....,,--       
  _--                  --_  
 <                        >)
@@ -976,7 +974,7 @@ mageAtt = '''\
           | ;  :|     
  _____.,-#%&$@%#&#~,._____
 '''
-mageSp = '''\
+mageSp = '''
                              ____
                      __,-~~/~    `---.
                    _/_,---(      ,    )
@@ -1026,7 +1024,7 @@ archerImg = '''
                                                       \\|.
                                                        /.
 '''
-archerAtt = '''\
+archerAtt = '''
                      z$6*#""""*c     :@$$****$$$$L
                   .@$F          "N..$F         '*$$
                  /$F             '$P             '$$r
@@ -1051,8 +1049,8 @@ archerAtt = '''\
                                   "N@"
 
 '''
-archerSp = '''\
-]z
+archerSp = '''
+
            `@@_
             @@@L
       .d@L,]@@@@L,
@@ -1103,7 +1101,7 @@ archerSp = '''\
                                                                     ~@@_
                                                                       ~@
 '''
-dragon = '''\
+dragon = '''
                                                     ___
                                                   .~))>>
                                                  .~)>>
@@ -1185,7 +1183,7 @@ profImg = '''
 ``NNNmmNNNNNNmmmmmmmmmmmmmNNNNNMMMMdhsyyshmyooooosydm++/::://::/:hdhhhhhhhhhhhdhhhdhhhhhhhhhhhhhhhhh
 `NNNNmNNNNNNNmmmmmmmmmmmmmmmNNNNMMNyhhsoyyyooooo+++yd/-:::/:/::/oddhhhhhhhhhhhdhhhdhdhhhhhhhhhhhhhhh
 '''
-dragonAtt = '''\
+dragonAtt = '''
                                        \\/
                                        ^`'.
                                        ^   `'.
@@ -1222,7 +1220,7 @@ dragonAtt = '''\
                                                           '. ~.'
 '''
 
-ShumanPM = '''\
+ShumanPM = '''
             ____
       _,.-'`_ o `;__,
        _.-'` '---'  '
@@ -1243,7 +1241,7 @@ ShumanPM = '''\
             '.`'--....--'`.'
               `'--....--'`
 '''
-ShumanLE = '''\
+ShumanLE = '''
  _                         
 | |                        
 | | __ _ ___  ___ _ __ ___ 
@@ -1251,7 +1249,7 @@ ShumanLE = '''\
 | | (_| \\__ \\  __/ |  \\__ \\
 |_|\\__,_|___/\\___|_|  |___/
 '''
-ShumanFB = '''\
+ShumanFB = '''
                (  .      )
            )           (              )
                  .  '   .   '  .  '  .
@@ -1261,7 +1259,7 @@ ShumanFB = '''\
      (_,) . ), ) _) _,')  (, ) '. )  ,. (' )
  jgs^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 '''
-ShumanOip = '''\
+ShumanOip = '''
 
                         _    ,-,    _
                  ,--, /: :\\/': :`\\/: :\\
