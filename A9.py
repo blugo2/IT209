@@ -468,7 +468,7 @@ class controller():
                 self.Player = PlayerK
                 return self.Player
             elif classType.lower() == "archer":
-                PlayerA = Archer(name,13,3,4,5,'a',1)
+                PlayerA = Archer(name,5,3,4,5,'a',1)
                 self.Player = PlayerA
                 return self.Player
             elif classType.lower() == "mage":
@@ -535,13 +535,13 @@ class controller():
             dunes. You stand at ease and being to take in your surroundings...
             """)
             
-        CloudMsg = [("As you continue along your journey,  you stop to gaze up upon the clouds.\nA curious thing catches your eye. In the distance you can see what you can only describe as a faint,\ndark object on the horizon. You blink, and it's gone! Hopefully it was nothing..."),
-                    ("Having progessed further along towards your destination you stop to take a rest.\nBefore your eyes fully close you note that the object on the horizion you saw eariler has reappeared,\nbigger in size yet still quit some distance away. You note that it may be a strom, but quickly dirft to sleep."),
-                    ("Now that you have made considerable progress through the area you are suddenly\naware of a dark presence near you. You look up and realize that the dark object from before was\nindeed a storm, a big one too it appears. Hopefully, you will reach your destination before it hits you..."),
-                    ("The storm is making quick  time, and you feel the air around you get colder.\nThe air tastes moist, and the sky is a deep, dark grey. You quickly push on towards the center of the area!"),
-                    ("The storm is upon you! The edge of the storm is quickly gaining ground on you,\ntry as you might you are not able to out run it. The sky turns dark around you, and thick, heavy droplets\n rain down against your skin. Lighting crackles and momentairy lights your path.\nYou breifly see a figure standing before you. They seem to be the epicentor of the storm..."),
-                    ("Death greets you...\n"),
-                    ("The clouds begin to clear up!\n")]
+        CloudMsg = ["As you continue along your journey,  you stop to gaze up upon the clouds.\nA curious thing catches your eye. In the distance you can see what you can only describe as a faint,\ndark object on the horizon. You blink, and it's gone! Hopefully it was nothing...",
+                    "Having progessed further along towards your destination you stop to take a rest.\nBefore your eyes fully close you note that the object on the horizion you saw eariler has reappeared,\nbigger in size yet still quit some distance away. You note that it may be a strom, but quickly dirft to sleep.",
+                    "Now that you have made considerable progress through the area you are suddenly\naware of a dark presence near you. You look up and realize that the dark object from before was\nindeed a storm, a big one too it appears. Hopefully, you will reach your destination before it hits you...",
+                    "The storm is making quick  time, and you feel the air around you get colder.\nThe air tastes moist, and the sky is a deep, dark grey. You quickly push on towards the center of the area!",
+                    "The storm is upon you! The edge of the storm is quickly gaining ground on you,\ntry as you might you are not able to out run it. The sky turns dark around you, and thick, heavy droplets\n rain down against your skin. Lighting crackles and momentairy lights your path.\nYou breifly see a figure standing before you. They seem to be the epicentor of the storm...",
+                    "Death greets you...\n",
+                    "The clouds begin to clear up!\n"]
         
         GameWorld = Biome(['Red Wood National Park','The Spooky Woods','Hidden Grove',"The Witch's Hut"],
                 ['Mount Denali National Park','The Snowy Peaks','The Raging River','The Abandoned Cabin'],
