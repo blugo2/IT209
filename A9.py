@@ -165,14 +165,14 @@ class Biome():
         self.choice = "G"
         
     def PickArea(self, Area):
-        if Area == "F":
-            self.choice = "F"
+        if Area.lower() == "f":
+            self.choice = "f"
 
-        elif Area == "M":
-            self.choice = "M"
+        elif Area.lower() == "m":
+            self.choice = "m"
             
-        elif Area == "D":
-            self.choice = "D"
+        elif Area.lower() == "d":
+            self.choice = "d"
         else:
             print("You entered an incorrect choice.")
 
@@ -411,6 +411,10 @@ class controller():
                 elif Player.c_type == 'a':
                     print(archerAtt)
                 print("You attack",BattleMob.ID,"!")
+                if BattleMob.Hp <= 0:
+                    print("The enemy has lost all its health!!")
+                else:
+                    print("\nThe enemy now has",BattleMob.Hp,"health remaining.")
                 
                 if BattleMob.Hp <= 0:
                     print("The enemy has lost all its health!!")
