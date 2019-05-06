@@ -567,12 +567,12 @@ class controller():
                     fobjects = ["bird's nest","some shrubs","a hollowed out log","a stone caked in moss","a vibrant patch of mushrooms","some wild bushes","some underbrush","a briar patch","waist high grass"]
                     dobjects = ['a skeleton','a broken cart','a shallow cave',"a tumble weed","a colorful cactus","a spikey cactus","a small dune","a patch of dead grass","an antelope skull","a large boulder"]
                     mobjects = ['a broken cart','a shallow cave','an abandoned mineshaft',"a jagged rock","a smooth stone","a puddle","crevace","a patch of weeds","a mound of gravel","a mossy stone"]
-                    #if choice in "forestsForests":
-                      #entry = input("\nTo your left you see "+random.choice(fobjects)+ ". To your right you see "+random.choice(fobjects)+". Which do you search?: ")
-                    #if choice in "desertsDeserts":
-                      #entry = input("\nTo your left you see "+random.choice(dobjects)+ ". To your right you see "+random.choice(dobjects)+". Which do you search?: ")
-                    #if choice in "mountainsMountains":
-                      #entry = input("\nTo your left you see "+random.choice(mobjects)+ ". To your right you see "+random.choice(mobjects)+". Which do you search?: ")
+                    if choice in "forestsForests":
+                      entry = input("\nTo your left you see "+random.choice(fobjects)+ ". To your right you see "+random.choice(fobjects)+". Which do you search?: ")
+                    if choice in "desertsDeserts":
+                      entry = input("\nTo your left you see "+random.choice(dobjects)+ ". To your right you see "+random.choice(dobjects)+". Which do you search?: ")
+                    if choice in "mountainsMountains":
+                      entry = input("\nTo your left you see "+random.choice(mobjects)+ ". To your right you see "+random.choice(mobjects)+". Which do you search?: ")
                     
                     entry = input("\nTo your left you see "+random.choice(fobjects)+ ". To your right you see "+random.choice(fobjects)+". Which do you search?: ")
                     print("\n")
