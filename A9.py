@@ -361,8 +361,8 @@ class controller():
         input("Hit enter to move continue...")
         print(BattleMob)
         while BattleMob.Hp > 0 and Player.Hp > 0:
-            BattleMob_Turn = random.randint(1,2)
-            if BattleMob_Turn == 1:
+            BattleMob_Turn = random.randint(1,4)
+            if BattleMob_Turn < 4:
                 Player.Hp -= BattleMob.Att
                 if Player.Hp >0:
                     attack = random.choice(BattleMob.Moves)
