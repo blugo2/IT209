@@ -449,7 +449,7 @@ class controller():
         if self.turnCount == 0:
             time.sleep(5)
             print(title)
-            time.sleep(1)
+            time.sleep(3)
             clear()
             print(choose)
             time.sleep(1)
