@@ -246,7 +246,7 @@ class controller():
             PlayerItems = {'Apple':1,"Useless stick":2,"Turkey leg":3, "Magic wand":4,"Chipotle":5,"Spellbook":6,"Big Mac":7,"Choatic staff":8}
             
         itemPickup = random.randint(1,10)
-        if itemPickup%3 == 0:
+        if itemPickup in range(1,4):
             pick = random.randint(0,7)
             current_item = []
             current_item.append(list(PlayerItems)[pick - 1])
@@ -348,8 +348,12 @@ class controller():
         if Player.Hp >0:
             print("You defeated a",BattleMob.ID)
         elif Player.Hp <= 0:
-            control.turnCount = 6
-            exit
+            control.turnCount += 10
+            clear()
+            print(gameOver)
+            print(graveStone)
+            controller.endCredits()
+            input("Hit enter to leave the game....")
         #elif BattleMob == Professor_Shuman:
          #   control.turnCount = 7
           #  exit
@@ -439,7 +443,7 @@ class controller():
             control.turnCount = 7
             exit
         elif Player.Hp <= 0:
-            control.turnCount = 6
+            control.turnCount =+ 10
             exit
 
 ###################################
@@ -449,10 +453,10 @@ class controller():
         if self.turnCount == 0:
             time.sleep(5)
             print(title)
-            time.sleep(3)
+            time.sleep(4)
             clear()
             print(choose)
-            time.sleep(1)
+            time.sleep(3)
 
             classType = input('''
             --- Knight
@@ -563,12 +567,12 @@ class controller():
                     fobjects = ["bird's nest","some shrubs","a hollowed out log","a stone caked in moss","a vibrant patch of mushrooms","some wild bushes","some underbrush","a briar patch","waist high grass"]
                     dobjects = ['a skeleton','a broken cart','a shallow cave',"a tumble weed","a colorful cactus","a spikey cactus","a small dune","a patch of dead grass","an antelope skull","a large boulder"]
                     mobjects = ['a broken cart','a shallow cave','an abandoned mineshaft',"a jagged rock","a smooth stone","a puddle","crevace","a patch of weeds","a mound of gravel","a mossy stone"]
-                    if choice in "forestsForests":
-                      entry = input("\nTo your left you see "+random.choice(fobjects)+ ". To your right you see "+random.choice(fobjects)+". Which do you search?: ")
-                    if choice in "desertsDeserts":
-                      entry = input("\nTo your left you see "+random.choice(dobjects)+ ". To your right you see "+random.choice(dobjects)+". Which do you search?: ")
-                    if choice in "mountainsMountains":
-                      entry = input("\nTo your left you see "+random.choice(mobjects)+ ". To your right you see "+random.choice(mobjects)+". Which do you search?: ")
+                    #if choice in "forestsForests":
+                      #entry = input("\nTo your left you see "+random.choice(fobjects)+ ". To your right you see "+random.choice(fobjects)+". Which do you search?: ")
+                    #if choice in "desertsDeserts":
+                      #entry = input("\nTo your left you see "+random.choice(dobjects)+ ". To your right you see "+random.choice(dobjects)+". Which do you search?: ")
+                    #if choice in "mountainsMountains":
+                      #entry = input("\nTo your left you see "+random.choice(mobjects)+ ". To your right you see "+random.choice(mobjects)+". Which do you search?: ")
                     
                     entry = input("\nTo your left you see "+random.choice(fobjects)+ ". To your right you see "+random.choice(fobjects)+". Which do you search?: ")
                     print("\n")
@@ -583,7 +587,7 @@ class controller():
                 elif self.turnCount == 5:
                     controller.endGame()
                     
-                elif self.turnCount == 6:
+                elif self.turnCount >= 10:
                     clear()
                     print(gameOver)
                     print(graveStone)
