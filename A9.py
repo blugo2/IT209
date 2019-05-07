@@ -5,7 +5,7 @@
 #Date Written: 4/17/19                                                    |
 #Purpose: Assignment 9 for IT209 and George Mason University              |  
 #-------------------------------------------------------------------------+
-print("Welcome to the start of Assignment 9...")
+print("Hello World...")
 from os import system, name
 import random
 #clear function created by mohit_negi @ Geeksforgeeks.com
@@ -203,6 +203,17 @@ class Items():
             self.archItems = archItems
             self.mageItems = mageItems
 
+    #def PlayerItems(self,Player):
+       # if Player.c_type == "k":
+        #    worldItems = self.knightems
+      ##      return worldItems
+      #  elif Player.c_type == "m":
+       #     worldItems = self.mageItems
+      #      return worldItems
+      #  elif Player.c_type == "a":
+      #      worldItems = self.archItems
+      #      return worldItems
+
     def getItems(self):
         if Player.c_type == "k":
             print("You find one:",random.choice(list(self.knightems)),"!")
@@ -251,11 +262,11 @@ class controller():
     
     def TriggerMob():
         itemPickup = random.randint(1,10)
-        if itemPickup in range(1,3):
+        if itemPickup in range(1,4):
             zombieMob = Zombie(8,2,"Zombie")
             BattleMob = zombieMob
             controller.TriggerBattle(BattleMob,zombieAtt,wolfAtt,dragonAtt)
-        elif itemPickup in range(4,6):
+        elif itemPickup in range(11,6):
             wolfMob = Wolf(10,2,"Wolf")
             BattleMob = wolfMob
             controller.TriggerBattle(BattleMob,zombieAtt,wolfAtt,dragonAtt)
@@ -343,6 +354,9 @@ class controller():
             print(graveStone)
             controller.endCredits()
             input("Hit enter to leave the game....")
+        #elif BattleMob == Professor_Shuman:
+         #   control.turnCount = 7
+          #  exit
 
 ##################################
     def TriggerBoss(BattleMob):
@@ -433,7 +447,8 @@ class controller():
             exit
 
 ###################################
-
+        
+        
     def PlayerClass(self):
         if self.turnCount == 0:
             time.sleep(5)
@@ -552,12 +567,12 @@ class controller():
                     fobjects = ["bird's nest","some shrubs","a hollowed out log","a stone caked in moss","a vibrant patch of mushrooms","some wild bushes","some underbrush","a briar patch","waist high grass"]
                     dobjects = ['a skeleton','a broken cart','a shallow cave',"a tumble weed","a colorful cactus","a spikey cactus","a small dune","a patch of dead grass","an antelope skull","a large boulder"]
                     mobjects = ['a broken cart','a shallow cave','an abandoned mineshaft',"a jagged rock","a smooth stone","a puddle","crevace","a patch of weeds","a mound of gravel","a mossy stone"]
-                    if choice in "forestsForests":
-                      entry = input("\nTo your left you see "+random.choice(fobjects)+ ". To your right you see "+random.choice(fobjects)+". Which do you search?: ")
-                    if choice in "desertsDeserts":
-                      entry = input("\nTo your left you see "+random.choice(dobjects)+ ". To your right you see "+random.choice(dobjects)+". Which do you search?: ")
-                    if choice in "mountainsMountains":
-                      entry = input("\nTo your left you see "+random.choice(mobjects)+ ". To your right you see "+random.choice(mobjects)+". Which do you search?: ")
+                    #if choice in "forestsForests":
+                      #entry = input("\nTo your left you see "+random.choice(fobjects)+ ". To your right you see "+random.choice(fobjects)+". Which do you search?: ")
+                    #if choice in "desertsDeserts":
+                      #entry = input("\nTo your left you see "+random.choice(dobjects)+ ". To your right you see "+random.choice(dobjects)+". Which do you search?: ")
+                    #if choice in "mountainsMountains":
+                      #entry = input("\nTo your left you see "+random.choice(mobjects)+ ". To your right you see "+random.choice(mobjects)+". Which do you search?: ")
                     
                     entry = input("\nTo your left you see "+random.choice(fobjects)+ ". To your right you see "+random.choice(fobjects)+". Which do you search?: ")
                     print("\n")
@@ -606,23 +621,22 @@ import random
 
 
 
-creditPage = [
-"Written by Billy Duggleby and Brendon Lugo for IT209 at George Mason University, Spring 2019.",
-"Ascii art wizard created by Morfina at www.asciiart.eu",
-"Ascii art knight created by fsc at http://ascii.co.uk",
+creditPage = ["Written by Billy Duggleby and Brendon Lugo for IT209 at George Mason University, Spring 2019.",
+              "Ascii art wizard created by Morfina at www.asciiart.eu",
+              "Ascii art knight created by fsc at http://ascii.co.uk",
 "Ascii art archer created by Erorppn Xrzavgm at http://ascii.co.uk",
 "Ascii art wolf created by bug at https://www.asciiart.eu/animals/wolves",
 "Ascii art dragon created by Joan at asciiart.website//joan/www.geocities.com",
 "Ascii Dragon attack Art by Shanaka Dias",
-"Ascii art Zombie by Nabis at https://www.asciiart.eu/mythology/skeletons",
+"AScii art Zombie by Nabis at https://www.asciiart.eu/mythology/skeletons",
 "Ascii zombie attack at http://www.asciiworld.com/-Death-Co-.html",
 "Gene Shuman ascii art created at https://www.text-image.com/convert/ascii.html",
-"Ascii art snake attack by CJR at http://ascii.co.uk/art/snake",
-"Ascii art tombstone by jgs at http://ascii.co.uk/art/rip",
+"AScii art snake attack by CJR at http://ascii.co.uk/art/snake",
+"AScii art tombstone by jgs at http://ascii.co.uk/art/rip",
 "Clear function created by mohit_negi @ Geeksforgeeks.com",
 "https://www.geeksforgeeks.org/clear-screen-python/",
-"Ascii GAME OVER by unknown at http://textart4u.blogspot.com/2013/05/game-over-text-art.html",
-"Ascii CONGRATS by hjw from http://ascii.co.uk/art/congrats"]
+"AScii GAME OVER by unknown at http://textart4u.blogspot.com/2013/05/game-over-text-art.html",
+"AScii CONGRATS by hjw from http://ascii.co.uk/art/congrats "]
 gameOver = '''\
 ┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼
 ███▀▀▀██┼███▀▀▀███┼███▀█▄█▀███┼██▀▀▀
@@ -1272,3 +1286,4 @@ control = controller(0,0,title,choose,0)
 Player = control.PlayerClass()
 control.startWorld()
 input("\n\nHit enter to exit the game")
+#Comment turn counter increase dark clouds recycle strs with while loop
