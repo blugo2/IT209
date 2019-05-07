@@ -203,17 +203,6 @@ class Items():
             self.archItems = archItems
             self.mageItems = mageItems
 
-    #def PlayerItems(self,Player):
-       # if Player.c_type == "k":
-        #    worldItems = self.knightems
-      ##      return worldItems
-      #  elif Player.c_type == "m":
-       #     worldItems = self.mageItems
-      #      return worldItems
-      #  elif Player.c_type == "a":
-      #      worldItems = self.archItems
-      #      return worldItems
-
     def getItems(self):
         if Player.c_type == "k":
             print("You find one:",random.choice(list(self.knightems)),"!")
@@ -262,11 +251,11 @@ class controller():
     
     def TriggerMob():
         itemPickup = random.randint(1,10)
-        if itemPickup in range(1,4):
+        if itemPickup in range(1,3):
             zombieMob = Zombie(8,2,"Zombie")
             BattleMob = zombieMob
             controller.TriggerBattle(BattleMob,zombieAtt,wolfAtt,dragonAtt)
-        elif itemPickup in range(11,6):
+        elif itemPickup in range(4,6):
             wolfMob = Wolf(10,2,"Wolf")
             BattleMob = wolfMob
             controller.TriggerBattle(BattleMob,zombieAtt,wolfAtt,dragonAtt)
@@ -354,9 +343,6 @@ class controller():
             print(graveStone)
             controller.endCredits()
             input("Hit enter to leave the game....")
-        #elif BattleMob == Professor_Shuman:
-         #   control.turnCount = 7
-          #  exit
 
 ##################################
     def TriggerBoss(BattleMob):
@@ -447,8 +433,7 @@ class controller():
             exit
 
 ###################################
-        
-        
+
     def PlayerClass(self):
         if self.turnCount == 0:
             time.sleep(5)
@@ -621,22 +606,23 @@ import random
 
 
 
-creditPage = ["Written by Billy Duggleby and Brendon Lugo for IT209 at George Mason University, Spring 2019.",
-              "Ascii art wizard created by Morfina at www.asciiart.eu",
-              "Ascii art knight created by fsc at http://ascii.co.uk",
+creditPage = [
+"Written by Billy Duggleby and Brendon Lugo for IT209 at George Mason University, Spring 2019.",
+"Ascii art wizard created by Morfina at www.asciiart.eu",
+"Ascii art knight created by fsc at http://ascii.co.uk",
 "Ascii art archer created by Erorppn Xrzavgm at http://ascii.co.uk",
 "Ascii art wolf created by bug at https://www.asciiart.eu/animals/wolves",
 "Ascii art dragon created by Joan at asciiart.website//joan/www.geocities.com",
 "Ascii Dragon attack Art by Shanaka Dias",
-"AScii art Zombie by Nabis at https://www.asciiart.eu/mythology/skeletons",
+"Ascii art Zombie by Nabis at https://www.asciiart.eu/mythology/skeletons",
 "Ascii zombie attack at http://www.asciiworld.com/-Death-Co-.html",
 "Gene Shuman ascii art created at https://www.text-image.com/convert/ascii.html",
-"AScii art snake attack by CJR at http://ascii.co.uk/art/snake",
-"AScii art tombstone by jgs at http://ascii.co.uk/art/rip",
+"Ascii art snake attack by CJR at http://ascii.co.uk/art/snake",
+"Ascii art tombstone by jgs at http://ascii.co.uk/art/rip",
 "Clear function created by mohit_negi @ Geeksforgeeks.com",
 "https://www.geeksforgeeks.org/clear-screen-python/",
-"AScii GAME OVER by unknown at http://textart4u.blogspot.com/2013/05/game-over-text-art.html",
-"AScii CONGRATS by hjw from http://ascii.co.uk/art/congrats "]
+"Ascii GAME OVER by unknown at http://textart4u.blogspot.com/2013/05/game-over-text-art.html",
+"Ascii CONGRATS by hjw from http://ascii.co.uk/art/congrats"]
 gameOver = '''\
 ┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼┼
 ███▀▀▀██┼███▀▀▀███┼███▀█▄█▀███┼██▀▀▀
@@ -1286,4 +1272,3 @@ control = controller(0,0,title,choose,0)
 Player = control.PlayerClass()
 control.startWorld()
 input("\n\nHit enter to exit the game")
-#Comment turn counter increase dark clouds recycle strs with while loop
