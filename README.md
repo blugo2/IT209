@@ -35,7 +35,7 @@ ie. Knights get swords, shields, and broadswords. Mages get spells and robes. Pr
 
 
 
-#TO DO LIST:
+~#TO DO LIST:
 # Boss event --> The clouds that progress each turn, end game message that leads to credits, activate credits, death, enter to move on, specails 
 #We need to implement endgame boss and turn sequence(clouds), along with ascii art for each mob. Then we need
 #to put in "hit enter to move on" after you search for an item or after a battle. Then we need to fix
@@ -43,7 +43,7 @@ ie. Knights get swords, shields, and broadswords. Mages get spells and robes. Pr
 
 #If we compete above
 
-#We can work on extra shit like intro and flavor text and end credits, ect
+#We can work on extra shit like intro and flavor text and end credits, ect~
 
 
 
