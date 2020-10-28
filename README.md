@@ -1,4 +1,4 @@
-# IT209
+# IT209 Text based Object Oriented RPG game
 This is a school project for IT209. A8 is our UML diagram. ~A9 is Brendons code he has worked on. A9_Billy is Billy's code he has worked on. There will be a final A9 that agregates both A9's~ A9 is the final project that combines both Brendons and Billys code
 
 Group Members: William Duggleby, Brendon Lugo
